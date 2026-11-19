@@ -7,6 +7,9 @@
 <meta name="theme-color" content="#0A0E17"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="Options Paper Bot"/>
+<link rel="icon" type="image/png" sizes="64x64" href="favicon.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"/>
 <meta name="description" content="Options Paper Bot live paper dashboard. Paper only — no real orders. End-of-day snapshot."/>
 <title>Options Paper Bot – Live Paper Dashboard</title>
 <style>
@@ -34,6 +37,8 @@ h1 { font-weight: 600; font-size: 26px; margin: 0; letter-spacing: -0.02em; }
 .pill.on { color: #3EE0A0; border-color: #1e5a44; background: #10281e; }
 .pill.live { color: #5EE0D0; border-color: #1e5a54; background: #102422; }
 .head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 18px; gap: 12px; }
+.brand { display: flex; align-items: center; gap: 12px; }
+.logo { width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0; display: block; background: #0A0E17; }
 .kpis { display: grid; gap: 10px; margin-bottom: 10px; }
 .kpis.live { grid-template-columns: repeat(7, 1fr); }
 .kpis.live .card { padding: 12px 12px; }
@@ -100,6 +105,7 @@ tr.total td { border-bottom: 0; border-top: 1px solid #2A3548; font-weight: 650;
   .banner { padding: 8px 14px; font-size: 11px; line-height: 1.45; }
   .wrap { padding: 16px 14px 24px; }
   h1 { font-size: 22px; }
+  .logo { width: 36px; height: 36px; border-radius: 8px; }
   .sub, .updated { font-size: 12px; }
   .head { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
   .kpis.live { grid-template-columns: repeat(2, 1fr); gap: 8px; }
@@ -129,9 +135,12 @@ tr.total td { border-bottom: 0; border-top: 1px solid #2A3548; font-weight: 650;
   <div class="wrap">
     <div class="head">
       <div>
-        <h1>Options Paper Bot – Live Paper Dashboard</h1>
+        <div class="brand">
+          <img class="logo" src="apple-touch-icon.png" width="44" height="44" alt="Options Paper Bot"/>
+          <h1>Options Paper Bot – Live Paper Dashboard</h1>
+        </div>
         <div class="sub">Paper ledger · America/Chicago · Thursday, Nov 19, 2026 · last mark Thu 11/19, 4:35 PM CT. Paper only — no real orders.</div>
-        <div class="updated">Last updated Thursday, Nov 19, 2026, 5:23 PM CT (end-of-day)</div>
+        <div class="updated">Last updated Thursday, Nov 19, 2026, 5:34 PM CT (end-of-day)</div>
       </div>
       <div class="pills">
         <span class="pill paper">Paper only</span>
@@ -206,7 +215,7 @@ tr.total td { border-bottom: 0; border-top: 1px solid #2A3548; font-weight: 650;
       </table></div>
     </div>
 
-    <div class="foot">Paper ledger only, starting at $10,000.00 on 11/16. Buys fill at mid plus 25% of the spread; marks are the latest Robinhood mid at the end-of-day snapshot. A simulated exit would fill below mid. Official daily equity is the last snapshot of each session. This page is updated with the end-of-day report and does not show live quotes. No real orders are placed. Weight changes are not applied without approval and at least 20 finished trades. Snapshot as of Thursday, Nov 19, 2026, 5:23 PM CT (end-of-day). Official end-of-day snapshot. Quotes are not live; this page is updated with the end-of-day report.</div>
+    <div class="foot">Paper ledger only, starting at $10,000.00 on 11/16. Buys fill at mid plus 25% of the spread; marks are the latest Robinhood mid at the end-of-day snapshot. A simulated exit would fill below mid. Official daily equity is the last snapshot of each session. This page is updated with the end-of-day report and does not show live quotes. No real orders are placed. Weight changes are not applied without approval and at least 20 finished trades. Snapshot as of Thursday, Nov 19, 2026, 5:34 PM CT (end-of-day). Official end-of-day snapshot. Quotes are not live; this page is updated with the end-of-day report.</div>
   </div>
 </div>
 </body>
