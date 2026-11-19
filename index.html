@@ -15,7 +15,7 @@
 <style>
 
 :root { --bg:#0A0E17; --card:#121826; --card2:#1A2233; --bd:#2A3548; --tx:#E7ECF5; --mu:#8A93A6;
-        --g:#3EE0A0; --r:#FF6B7A; --gold:#F0C14B; --live:#5EE0D0; }
+        --g:#3EE0A0; --r:#FF6B7A; --gold:#F0C14B; --live:#5EE0D0; --gap: 16px; }
 * { box-sizing: border-box; }
 html { color-scheme: dark; background: var(--bg); }
 html, body { margin: 0; padding: 0; background: var(--bg); color: var(--tx);
@@ -36,10 +36,10 @@ h1 { font-weight: 600; font-size: 26px; margin: 0; letter-spacing: -0.02em; }
 .pill.off { color: #FF6B7A; border-color: #5a2a32; background: #2a1418; }
 .pill.on { color: #3EE0A0; border-color: #1e5a44; background: #10281e; }
 .pill.live { color: #5EE0D0; border-color: #1e5a54; background: #102422; }
-.head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 18px; gap: 12px; }
+.head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--gap); gap: 12px; }
 .brand { display: flex; align-items: center; gap: 12px; }
 .logo { width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0; display: block; background: #0A0E17; }
-.kpis { display: grid; gap: 10px; margin-bottom: 10px; }
+.kpis { display: grid; gap: var(--gap); margin-bottom: var(--gap); }
 .kpis.live { grid-template-columns: repeat(7, 1fr); }
 .kpis.live .card { padding: 12px 12px; }
 .kpis.live .card .v { font-size: 20px; }
@@ -53,14 +53,14 @@ h1 { font-weight: 600; font-size: 26px; margin: 0; letter-spacing: -0.02em; }
 .dash { color: #8A93A6; }
 .section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mu); margin: 16px 0 8px; }
 .callout { background: #2a210c; border: 1px solid #6a5420; color: #E7ECF5; border-radius: 14px; padding: 12px 14px;
-  font-size: 13px; line-height: 1.5; margin: 0 0 14px; }
+  font-size: 13px; line-height: 1.5; margin: 0 0 var(--gap); }
 .callout.warn { background: #2a210c; border-color: #6a5420; }
 .callout .lead { font-weight: 650; color: var(--gold); margin-bottom: 4px; }
-.chart { background: var(--card); border: 1px solid var(--bd); border-radius: 14px; padding: 12px 12px 14px; margin-bottom: 10px; overflow: visible; }
+.chart { background: var(--card); border: 1px solid var(--bd); border-radius: 14px; padding: 12px 12px 14px; margin-bottom: var(--gap); overflow: visible; }
 .chart h3 { margin: 0 0 6px 8px; font-size: 13px; font-weight: 600; text-transform: none; letter-spacing: 0; color: var(--tx); }
 .chart .note { color: var(--mu); font-size: 11px; margin: 0 8px 8px; line-height: 1.45; }
 .chart svg { display: block; width: 100%; height: auto; }
-.poscard { margin-bottom: 10px; }
+.poscard { margin: 0 0 var(--gap); }
 .poscard > h3, .sig-wrap h3, .heatcard h3, .tradecard h3, .wtcard h3, .riskcard h3 {
   margin: 0 0 6px; font-size: 13px; font-weight: 650; text-transform: none; letter-spacing: 0; color: var(--tx); }
 .note { color: var(--mu); font-size: 11px; line-height: 1.45; margin: 0 0 10px; }
@@ -84,9 +84,10 @@ tr.total td { border-bottom: 0; border-top: 1px solid #2A3548; font-weight: 650;
 .cfill { position: absolute; top: 0; bottom: 0; opacity: 0.85; }
 .cv { font-size: 10px; font-variant-numeric: tabular-nums; }
 .sig-notes { font-size: 11px; color: var(--mu); margin-top: 6px; }
-.bottom { display: grid; grid-template-columns: 3fr 1fr; gap: 10px; align-items: stretch; margin-bottom: 10px; }
-.leftcol { display: flex; flex-direction: column; gap: 10px; }
-.heatcard, .tradecard, .wtcard, .riskcard, .poscard { margin: 0; }
+.bottom { display: grid; grid-template-columns: 3fr 1fr; gap: var(--gap); align-items: start; margin-bottom: var(--gap); }
+.leftcol { display: flex; flex-direction: column; gap: var(--gap); }
+.heatcard, .tradecard, .wtcard, .riskcard { margin: 0; }
+.wtcard { align-self: start; }
 .heatcard, .tradecard, .wtcard { display: flex; flex-direction: column; }
 .empty-panel { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
   text-align: center; min-height: 160px; border: 1px dashed #2A3548; border-radius: 12px; padding: 28px 22px; color: #8A93A6; }
@@ -95,7 +96,7 @@ tr.total td { border-bottom: 0; border-top: 1px solid #2A3548; font-weight: 650;
 .legend { margin: 8px 0; }
 .swatch { display: inline-flex; align-items: center; gap: 6px; margin-right: 14px; font-size: 11px; color: var(--mu); }
 .swatch i { width: 14px; height: 14px; border-radius: 3px; display: inline-block; border: 1px solid var(--bd); }
-.foot { color: var(--mu); font-size: 11px; line-height: 1.5; margin-top: 16px; }
+.foot { color: var(--mu); font-size: 11px; line-height: 1.5; margin-top: var(--gap); }
 .table-scroll { overflow: visible; }
 .svg-mobile { display: none; }
 @media (max-width: 760px) {
@@ -107,8 +108,8 @@ tr.total td { border-bottom: 0; border-top: 1px solid #2A3548; font-weight: 650;
   h1 { font-size: 22px; }
   .logo { width: 36px; height: 36px; border-radius: 8px; }
   .sub, .updated { font-size: 12px; }
-  .head { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
-  .kpis.live { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .head { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: var(--gap); }
+  .kpis.live { grid-template-columns: repeat(2, 1fr); gap: var(--gap); }
   .kpis.live .card { padding: 12px; }
   .kpis.live .card .v { font-size: 18px; }
   .svg-desktop { display: none; }
@@ -144,7 +145,7 @@ tr.total td { border-bottom: 0; border-top: 1px solid #2A3548; font-weight: 650;
           <h1>Options Paper Bot – Live Paper Dashboard</h1>
         </div>
         <div class="sub">Paper ledger · America/Chicago · Thursday, Nov 19, 2026 · last mark Thu 11/19, 4:35 PM CT. Paper only — no real orders.</div>
-        <div class="updated">Last updated Thursday, Nov 19, 2026, 5:46 PM CT (end-of-day)</div>
+        <div class="updated">Last updated Thursday, Nov 19, 2026, 5:54 PM CT (end-of-day)</div>
       </div>
       <div class="pills">
         <span class="pill paper">Paper only</span>
@@ -219,7 +220,7 @@ tr.total td { border-bottom: 0; border-top: 1px solid #2A3548; font-weight: 650;
       </table></div>
     </div>
 
-    <div class="foot">Paper ledger only, starting at $10,000.00 on 11/16. Buys fill at mid plus 25% of the spread; marks are the latest Robinhood mid at the end-of-day snapshot. A simulated exit would fill below mid. Official daily equity is the last snapshot of each session. This page is updated with the end-of-day report and does not show live quotes. No real orders are placed. Weight changes are not applied without approval and at least 20 finished trades. Snapshot as of Thursday, Nov 19, 2026, 5:46 PM CT (end-of-day). Official end-of-day snapshot. Quotes are not live; this page is updated with the end-of-day report.</div>
+    <div class="foot">Paper ledger only, starting at $10,000.00 on 11/16. Buys fill at mid plus 25% of the spread; marks are the latest Robinhood mid at the end-of-day snapshot. A simulated exit would fill below mid. Official daily equity is the last snapshot of each session. This page is updated with the end-of-day report and does not show live quotes. No real orders are placed. Weight changes are not applied without approval and at least 20 finished trades. Snapshot as of Thursday, Nov 19, 2026, 5:54 PM CT (end-of-day). Official end-of-day snapshot. Quotes are not live; this page is updated with the end-of-day report.</div>
   </div>
 </div>
 </body>
