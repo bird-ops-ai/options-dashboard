@@ -60,6 +60,17 @@ h1 { font-weight: 600; font-size: 26px; margin: 0; letter-spacing: -0.02em; }
 .chart h3 { margin: 0 0 6px 8px; font-size: 13px; font-weight: 600; text-transform: none; letter-spacing: 0; color: var(--tx); }
 .chart .note { color: var(--mu); font-size: 11px; margin: 0 8px 8px; line-height: 1.45; }
 .chart svg { display: block; width: 100%; height: auto; }
+.chart-plot { position: relative; }
+.chart-plot svg { cursor: crosshair; touch-action: none; }
+.chart-tip {
+  position: absolute; pointer-events: none; z-index: 6; left: 0; top: 0;
+  background: #1A2233; color: var(--tx); border: 1px solid var(--bd);
+  border-radius: 8px; padding: 8px 10px; font-size: 12px; line-height: 1.35;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.45); white-space: nowrap;
+}
+.chart-tip[hidden] { display: none !important; }
+.chart-tip-date { color: var(--mu); font-size: 11px; font-weight: 600; letter-spacing: 0.02em; }
+.chart-tip-val { color: var(--tx); font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
 .poscard { margin: 0 0 var(--gap); }
 .poscard > h3, .sig-wrap h3, .heatcard h3, .tradecard h3, .riskcard h3 {
   margin: 0 0 6px; font-size: 13px; font-weight: 650; text-transform: none; letter-spacing: 0; color: var(--tx); }
@@ -126,7 +137,7 @@ tr.total td { border-bottom: 0; border-top: 1px solid #2A3548; font-weight: 650;
   .svg-desktop { display: none; }
   .svg-mobile { display: block; }
   .svg-mobile svg { display: block; width: 100%; height: auto; max-width: 100%; }
-  .chart { padding: 10px 8px 12px; overflow: hidden; }
+  .chart { padding: 10px 8px 12px; overflow: visible; }
   .chart h3 { margin-left: 4px; }
   .chart .note { margin-left: 4px; margin-right: 4px; font-size: 11px; }
   .chart svg { display: block; width: 100%; height: auto; max-width: 100%; }
@@ -158,7 +169,7 @@ tr.total td { border-bottom: 0; border-top: 1px solid #2A3548; font-weight: 650;
           <h1>Options Bot – Live Dashboard</h1>
         </div>
         <div class="sub">America/Chicago · Thursday, Nov 19, 2026 · last mark Thu 11/19, 4:35 PM CT. No real orders.</div>
-        <div class="updated">Last updated Thursday, Nov 19, 2026, 6:11 PM CT (end-of-day)</div>
+        <div class="updated">Last updated Thursday, Nov 19, 2026, 6:20 PM CT (end-of-day)</div>
       </div>
       <div class="pills">
         <span class="pill live">Live book $11,681.91</span>
@@ -173,15 +184,15 @@ tr.total td { border-bottom: 0; border-top: 1px solid #2A3548; font-weight: 650;
     <div class="chart">
       <h3>Equity · $10,000 start on 11/16</h3>
       <p class="note">Official daily marks only: the last snapshot of each session. The gold line is this week's +5% target of $10,500.00. Live book only — no backtest path and no invented points.</p>
-      <div class="svg-desktop"><svg xmlns="http://www.w3.org/2000/svg" width="1320" height="300" viewBox="0 0 1320 300" role="img"><rect x="0" y="0" width="1320" height="300" fill="#121826"/><line x1="64" y1="264.0" x2="1302" y2="264.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="264.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$9,200</text><line x1="64" y1="202.0" x2="1302" y2="202.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="202.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$10,054</text><line x1="64" y1="140.0" x2="1302" y2="140.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="140.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$10,908</text><line x1="64" y1="78.0" x2="1302" y2="78.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="78.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$11,762</text><line x1="64" y1="16.0" x2="1302" y2="16.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="16.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$12,616</text><text x="64.0" y="288" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/16</text><text x="476.7" y="288" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/17</text><text x="889.3" y="288" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/18</text><text x="1302.0" y="288" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/19</text><line x1="64" y1="169.6" x2="1302" y2="169.6" stroke="#F0C14B" stroke-width="1.4" stroke-dasharray="6 5"/><text x="1302" y="163.6" text-anchor="end" fill="#F0C14B" font-size="11" font-family="system-ui, sans-serif">+5% target $10,500</text><path d="M 64.0,205.9 L 476.7,158.3 L 889.3,194.5 L 1302.0,83.8 L 1302.0,264.0 L 64.0,264.0 Z" fill="#5EE0D0" fill-opacity="0.12"/><path d="M 64.0,205.9 L 476.7,158.3 L 889.3,194.5 L 1302.0,83.8" fill="none" stroke="#5EE0D0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="64.0" cy="205.9" r="3.2" fill="#5EE0D0" stroke="#0A0E17" stroke-width="1.4"/><circle cx="476.7" cy="158.3" r="3.2" fill="#5EE0D0" stroke="#0A0E17" stroke-width="1.4"/><circle cx="889.3" cy="194.5" r="3.2" fill="#5EE0D0" stroke="#0A0E17" stroke-width="1.4"/><circle cx="1302.0" cy="83.8" r="3.2" fill="#5EE0D0" stroke="#0A0E17" stroke-width="1.4"/></svg></div>
-      <div class="svg-mobile"><svg xmlns="http://www.w3.org/2000/svg" width="346" height="240" viewBox="0 0 346 240" role="img"><rect x="0" y="0" width="346" height="240" fill="#121826"/><line x1="64" y1="204.0" x2="328" y2="204.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="204.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$9,200</text><line x1="64" y1="157.0" x2="328" y2="157.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="157.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$10,054</text><line x1="64" y1="110.0" x2="328" y2="110.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="110.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$10,908</text><line x1="64" y1="63.0" x2="328" y2="63.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="63.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$11,762</text><line x1="64" y1="16.0" x2="328" y2="16.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="16.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$12,616</text><text x="64.0" y="228" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/16</text><text x="152.0" y="228" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/17</text><text x="240.0" y="228" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/18</text><text x="328.0" y="228" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/19</text><line x1="64" y1="132.5" x2="328" y2="132.5" stroke="#F0C14B" stroke-width="1.4" stroke-dasharray="6 5"/><text x="328" y="126.5" text-anchor="end" fill="#F0C14B" font-size="11" font-family="system-ui, sans-serif">+5% target $10,500</text><path d="M 64.0,160.0 L 152.0,123.9 L 240.0,151.3 L 328.0,67.4 L 328.0,204.0 L 64.0,204.0 Z" fill="#5EE0D0" fill-opacity="0.12"/><path d="M 64.0,160.0 L 152.0,123.9 L 240.0,151.3 L 328.0,67.4" fill="none" stroke="#5EE0D0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="64.0" cy="160.0" r="3.2" fill="#5EE0D0" stroke="#0A0E17" stroke-width="1.4"/><circle cx="152.0" cy="123.9" r="3.2" fill="#5EE0D0" stroke="#0A0E17" stroke-width="1.4"/><circle cx="240.0" cy="151.3" r="3.2" fill="#5EE0D0" stroke="#0A0E17" stroke-width="1.4"/><circle cx="328.0" cy="67.4" r="3.2" fill="#5EE0D0" stroke="#0A0E17" stroke-width="1.4"/></svg></div>
+      <div class="svg-desktop"><div class="chart-plot" data-kind="equity" id="chart-equity-desktop"><svg xmlns="http://www.w3.org/2000/svg" width="1320" height="300" viewBox="0 0 1320 300" role="img"><rect x="0" y="0" width="1320" height="300" fill="#121826"/><line x1="64" y1="264.0" x2="1302" y2="264.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="264.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$9,200</text><line x1="64" y1="202.0" x2="1302" y2="202.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="202.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$10,054</text><line x1="64" y1="140.0" x2="1302" y2="140.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="140.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$10,908</text><line x1="64" y1="78.0" x2="1302" y2="78.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="78.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$11,762</text><line x1="64" y1="16.0" x2="1302" y2="16.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="16.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$12,616</text><text x="64.0" y="288" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/16</text><text x="476.7" y="288" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/17</text><text x="889.3" y="288" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/18</text><text x="1302.0" y="288" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/19</text><line x1="64" y1="169.6" x2="1302" y2="169.6" stroke="#F0C14B" stroke-width="1.4" stroke-dasharray="6 5"/><text x="1302" y="163.6" text-anchor="end" fill="#F0C14B" font-size="11" font-family="system-ui, sans-serif">+5% target $10,500</text><path d="M 64.0,205.9 L 476.7,158.3 L 889.3,194.5 L 1302.0,83.8 L 1302.0,264.0 L 64.0,264.0 Z" fill="#5EE0D0" fill-opacity="0.12"/><path d="M 64.0,205.9 L 476.7,158.3 L 889.3,194.5 L 1302.0,83.8" fill="none" stroke="#5EE0D0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="64.0" cy="205.9" r="3.2" fill="#5EE0D0" stroke="#0A0E17" stroke-width="1.4"/><circle cx="476.7" cy="158.3" r="3.2" fill="#5EE0D0" stroke="#0A0E17" stroke-width="1.4"/><circle cx="889.3" cy="194.5" r="3.2" fill="#5EE0D0" stroke="#0A0E17" stroke-width="1.4"/><circle cx="1302.0" cy="83.8" r="3.2" fill="#5EE0D0" stroke="#0A0E17" stroke-width="1.4"/><g class="chart-hover" visibility="hidden" pointer-events="none"><line class="chart-crosshair" x1="0" x2="0" y1="16" y2="264" stroke="#E7ECF5" stroke-opacity="0.45" stroke-width="1"/><circle class="chart-dot" cx="0" cy="0" r="5.5" fill="#5EE0D0" stroke="#0A0E17" stroke-width="2"/></g></svg><div class="chart-tip" hidden></div><script type="application/json" class="chart-data">[{"x": 64.0, "y": 205.9, "date": "Mon 11/16", "value": "$10,000.00"}, {"x": 476.7, "y": 158.3, "date": "Tue 11/17", "value": "$10,655.91"}, {"x": 889.3, "y": 194.5, "date": "Wed 11/18", "value": "$10,157.91"}, {"x": 1302.0, "y": 83.8, "date": "Thu 11/19", "value": "$11,681.91"}]</script></div></div>
+      <div class="svg-mobile"><div class="chart-plot" data-kind="equity" id="chart-equity-mobile"><svg xmlns="http://www.w3.org/2000/svg" width="346" height="240" viewBox="0 0 346 240" role="img"><rect x="0" y="0" width="346" height="240" fill="#121826"/><line x1="64" y1="204.0" x2="328" y2="204.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="204.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$9,200</text><line x1="64" y1="157.0" x2="328" y2="157.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="157.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$10,054</text><line x1="64" y1="110.0" x2="328" y2="110.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="110.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$10,908</text><line x1="64" y1="63.0" x2="328" y2="63.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="63.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$11,762</text><line x1="64" y1="16.0" x2="328" y2="16.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="16.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$12,616</text><text x="64.0" y="228" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/16</text><text x="152.0" y="228" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/17</text><text x="240.0" y="228" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/18</text><text x="328.0" y="228" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/19</text><line x1="64" y1="132.5" x2="328" y2="132.5" stroke="#F0C14B" stroke-width="1.4" stroke-dasharray="6 5"/><text x="328" y="126.5" text-anchor="end" fill="#F0C14B" font-size="11" font-family="system-ui, sans-serif">+5% target $10,500</text><path d="M 64.0,160.0 L 152.0,123.9 L 240.0,151.3 L 328.0,67.4 L 328.0,204.0 L 64.0,204.0 Z" fill="#5EE0D0" fill-opacity="0.12"/><path d="M 64.0,160.0 L 152.0,123.9 L 240.0,151.3 L 328.0,67.4" fill="none" stroke="#5EE0D0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="64.0" cy="160.0" r="3.2" fill="#5EE0D0" stroke="#0A0E17" stroke-width="1.4"/><circle cx="152.0" cy="123.9" r="3.2" fill="#5EE0D0" stroke="#0A0E17" stroke-width="1.4"/><circle cx="240.0" cy="151.3" r="3.2" fill="#5EE0D0" stroke="#0A0E17" stroke-width="1.4"/><circle cx="328.0" cy="67.4" r="3.2" fill="#5EE0D0" stroke="#0A0E17" stroke-width="1.4"/><g class="chart-hover" visibility="hidden" pointer-events="none"><line class="chart-crosshair" x1="0" x2="0" y1="16" y2="204" stroke="#E7ECF5" stroke-opacity="0.45" stroke-width="1"/><circle class="chart-dot" cx="0" cy="0" r="5.5" fill="#5EE0D0" stroke="#0A0E17" stroke-width="2"/></g></svg><div class="chart-tip" hidden></div><script type="application/json" class="chart-data">[{"x": 64.0, "y": 160.0, "date": "Mon 11/16", "value": "$10,000.00"}, {"x": 152.0, "y": 123.9, "date": "Tue 11/17", "value": "$10,655.91"}, {"x": 240.0, "y": 151.3, "date": "Wed 11/18", "value": "$10,157.91"}, {"x": 328.0, "y": 67.4, "date": "Thu 11/19", "value": "$11,681.91"}]</script></div></div>
     </div>
 
     <div class="chart">
       <h3>Drawdown from prior peak</h3>
       <p class="note">Official end-of-day drawdown from the running high-water mark. The kill switch fires at −30% from the live peak ($8,177.34 at the current HWM).</p>
-      <div class="svg-desktop"><svg xmlns="http://www.w3.org/2000/svg" width="1320" height="200" viewBox="0 0 1320 200" role="img"><rect x="0" y="0" width="1320" height="200" fill="#121826"/><line x1="64" y1="164.0" x2="1302" y2="164.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="164.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">−35%</text><line x1="64" y1="127.0" x2="1302" y2="127.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="127.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">−26%</text><line x1="64" y1="90.0" x2="1302" y2="90.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="90.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">−16%</text><line x1="64" y1="53.0" x2="1302" y2="53.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="53.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">−7%</text><line x1="64" y1="16.0" x2="1302" y2="16.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="16.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">+2%</text><text x="64.0" y="188" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/16</text><text x="476.7" y="188" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/17</text><text x="889.3" y="188" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/18</text><text x="1302.0" y="188" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/19</text><line x1="64" y1="144.0" x2="1302" y2="144.0" stroke="#FF6B7A" stroke-width="1.4" stroke-dasharray="6 5"/><text x="1302" y="138.0" text-anchor="end" fill="#FF6B7A" font-size="11" font-family="system-ui, sans-serif">Kill −30%</text><path d="M 64.0,24.0 L 476.7,24.0 L 889.3,42.7 L 1302.0,24.0 L 1302.0,24.0 L 64.0,24.0 Z" fill="#FF6B7A" fill-opacity="0.12"/><path d="M 64.0,24.0 L 476.7,24.0 L 889.3,42.7 L 1302.0,24.0" fill="none" stroke="#FF6B7A" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="64.0" cy="24.0" r="3.2" fill="#FF6B7A" stroke="#0A0E17" stroke-width="1.4"/><circle cx="476.7" cy="24.0" r="3.2" fill="#FF6B7A" stroke="#0A0E17" stroke-width="1.4"/><circle cx="889.3" cy="42.7" r="3.2" fill="#FF6B7A" stroke="#0A0E17" stroke-width="1.4"/><circle cx="1302.0" cy="24.0" r="3.2" fill="#FF6B7A" stroke="#0A0E17" stroke-width="1.4"/></svg></div>
-      <div class="svg-mobile"><svg xmlns="http://www.w3.org/2000/svg" width="346" height="180" viewBox="0 0 346 180" role="img"><rect x="0" y="0" width="346" height="180" fill="#121826"/><line x1="64" y1="144.0" x2="328" y2="144.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="144.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">−35%</text><line x1="64" y1="112.0" x2="328" y2="112.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="112.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">−26%</text><line x1="64" y1="80.0" x2="328" y2="80.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="80.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">−16%</text><line x1="64" y1="48.0" x2="328" y2="48.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="48.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">−7%</text><line x1="64" y1="16.0" x2="328" y2="16.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="16.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">+2%</text><text x="64.0" y="168" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/16</text><text x="152.0" y="168" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/17</text><text x="240.0" y="168" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/18</text><text x="328.0" y="168" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/19</text><line x1="64" y1="126.7" x2="328" y2="126.7" stroke="#FF6B7A" stroke-width="1.4" stroke-dasharray="6 5"/><text x="328" y="120.7" text-anchor="end" fill="#FF6B7A" font-size="11" font-family="system-ui, sans-serif">Kill −30%</text><path d="M 64.0,22.9 L 152.0,22.9 L 240.0,39.1 L 328.0,22.9 L 328.0,22.9 L 64.0,22.9 Z" fill="#FF6B7A" fill-opacity="0.12"/><path d="M 64.0,22.9 L 152.0,22.9 L 240.0,39.1 L 328.0,22.9" fill="none" stroke="#FF6B7A" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="64.0" cy="22.9" r="3.2" fill="#FF6B7A" stroke="#0A0E17" stroke-width="1.4"/><circle cx="152.0" cy="22.9" r="3.2" fill="#FF6B7A" stroke="#0A0E17" stroke-width="1.4"/><circle cx="240.0" cy="39.1" r="3.2" fill="#FF6B7A" stroke="#0A0E17" stroke-width="1.4"/><circle cx="328.0" cy="22.9" r="3.2" fill="#FF6B7A" stroke="#0A0E17" stroke-width="1.4"/></svg></div>
+      <div class="svg-desktop"><div class="chart-plot" data-kind="drawdown_pct" id="chart-drawdown-desktop"><svg xmlns="http://www.w3.org/2000/svg" width="1320" height="200" viewBox="0 0 1320 200" role="img"><rect x="0" y="0" width="1320" height="200" fill="#121826"/><line x1="64" y1="164.0" x2="1302" y2="164.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="164.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">−35%</text><line x1="64" y1="127.0" x2="1302" y2="127.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="127.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">−26%</text><line x1="64" y1="90.0" x2="1302" y2="90.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="90.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">−16%</text><line x1="64" y1="53.0" x2="1302" y2="53.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="53.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">−7%</text><line x1="64" y1="16.0" x2="1302" y2="16.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="16.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">+2%</text><text x="64.0" y="188" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/16</text><text x="476.7" y="188" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/17</text><text x="889.3" y="188" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/18</text><text x="1302.0" y="188" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/19</text><line x1="64" y1="144.0" x2="1302" y2="144.0" stroke="#FF6B7A" stroke-width="1.4" stroke-dasharray="6 5"/><text x="1302" y="138.0" text-anchor="end" fill="#FF6B7A" font-size="11" font-family="system-ui, sans-serif">Kill −30%</text><path d="M 64.0,24.0 L 476.7,24.0 L 889.3,42.7 L 1302.0,24.0 L 1302.0,24.0 L 64.0,24.0 Z" fill="#FF6B7A" fill-opacity="0.12"/><path d="M 64.0,24.0 L 476.7,24.0 L 889.3,42.7 L 1302.0,24.0" fill="none" stroke="#FF6B7A" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="64.0" cy="24.0" r="3.2" fill="#FF6B7A" stroke="#0A0E17" stroke-width="1.4"/><circle cx="476.7" cy="24.0" r="3.2" fill="#FF6B7A" stroke="#0A0E17" stroke-width="1.4"/><circle cx="889.3" cy="42.7" r="3.2" fill="#FF6B7A" stroke="#0A0E17" stroke-width="1.4"/><circle cx="1302.0" cy="24.0" r="3.2" fill="#FF6B7A" stroke="#0A0E17" stroke-width="1.4"/><g class="chart-hover" visibility="hidden" pointer-events="none"><line class="chart-crosshair" x1="0" x2="0" y1="16" y2="164" stroke="#E7ECF5" stroke-opacity="0.45" stroke-width="1"/><circle class="chart-dot" cx="0" cy="0" r="5.5" fill="#FF6B7A" stroke="#0A0E17" stroke-width="2"/></g></svg><div class="chart-tip" hidden></div><script type="application/json" class="chart-data">[{"x": 64.0, "y": 24.0, "date": "Mon 11/16", "value": "0.00% (+$0.00)"}, {"x": 476.7, "y": 24.0, "date": "Tue 11/17", "value": "0.00% (+$0.00)"}, {"x": 889.3, "y": 42.7, "date": "Wed 11/18", "value": "−4.67% (−$498.00)"}, {"x": 1302.0, "y": 24.0, "date": "Thu 11/19", "value": "0.00% (+$0.00)"}]</script></div></div>
+      <div class="svg-mobile"><div class="chart-plot" data-kind="drawdown_pct" id="chart-drawdown-mobile"><svg xmlns="http://www.w3.org/2000/svg" width="346" height="180" viewBox="0 0 346 180" role="img"><rect x="0" y="0" width="346" height="180" fill="#121826"/><line x1="64" y1="144.0" x2="328" y2="144.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="144.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">−35%</text><line x1="64" y1="112.0" x2="328" y2="112.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="112.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">−26%</text><line x1="64" y1="80.0" x2="328" y2="80.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="80.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">−16%</text><line x1="64" y1="48.0" x2="328" y2="48.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="48.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">−7%</text><line x1="64" y1="16.0" x2="328" y2="16.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="16.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">+2%</text><text x="64.0" y="168" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/16</text><text x="152.0" y="168" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/17</text><text x="240.0" y="168" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/18</text><text x="328.0" y="168" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/19</text><line x1="64" y1="126.7" x2="328" y2="126.7" stroke="#FF6B7A" stroke-width="1.4" stroke-dasharray="6 5"/><text x="328" y="120.7" text-anchor="end" fill="#FF6B7A" font-size="11" font-family="system-ui, sans-serif">Kill −30%</text><path d="M 64.0,22.9 L 152.0,22.9 L 240.0,39.1 L 328.0,22.9 L 328.0,22.9 L 64.0,22.9 Z" fill="#FF6B7A" fill-opacity="0.12"/><path d="M 64.0,22.9 L 152.0,22.9 L 240.0,39.1 L 328.0,22.9" fill="none" stroke="#FF6B7A" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="64.0" cy="22.9" r="3.2" fill="#FF6B7A" stroke="#0A0E17" stroke-width="1.4"/><circle cx="152.0" cy="22.9" r="3.2" fill="#FF6B7A" stroke="#0A0E17" stroke-width="1.4"/><circle cx="240.0" cy="39.1" r="3.2" fill="#FF6B7A" stroke="#0A0E17" stroke-width="1.4"/><circle cx="328.0" cy="22.9" r="3.2" fill="#FF6B7A" stroke="#0A0E17" stroke-width="1.4"/><g class="chart-hover" visibility="hidden" pointer-events="none"><line class="chart-crosshair" x1="0" x2="0" y1="16" y2="144" stroke="#E7ECF5" stroke-opacity="0.45" stroke-width="1"/><circle class="chart-dot" cx="0" cy="0" r="5.5" fill="#FF6B7A" stroke="#0A0E17" stroke-width="2"/></g></svg><div class="chart-tip" hidden></div><script type="application/json" class="chart-data">[{"x": 64.0, "y": 22.9, "date": "Mon 11/16", "value": "0.00% (+$0.00)"}, {"x": 152.0, "y": 22.9, "date": "Tue 11/17", "value": "0.00% (+$0.00)"}, {"x": 240.0, "y": 39.1, "date": "Wed 11/18", "value": "−4.67% (−$498.00)"}, {"x": 328.0, "y": 22.9, "date": "Thu 11/19", "value": "0.00% (+$0.00)"}]</script></div></div>
     </div>
 
     <div class="card poscard">
@@ -224,8 +235,133 @@ tr.total td { border-bottom: 0; border-top: 1px solid #2A3548; font-weight: 650;
       </table></div>
     </div>
 
-    <div class="foot">Starting at $10,000.00 on 11/16. Buys fill at mid plus 25% of the spread; marks are the latest Robinhood mid at the end-of-day snapshot. A simulated exit would fill below mid. Official daily equity is the last snapshot of each session. This page is updated with the end-of-day report and does not show live quotes. No real orders are placed. Weight changes are not applied without approval and at least 20 finished trades. Snapshot as of Thursday, Nov 19, 2026, 6:11 PM CT (end-of-day). Official end-of-day snapshot. Quotes are not live; this page is updated with the end-of-day report.</div>
+    <div class="foot">Starting at $10,000.00 on 11/16. Buys fill at mid plus 25% of the spread; marks are the latest Robinhood mid at the end-of-day snapshot. A simulated exit would fill below mid. Official daily equity is the last snapshot of each session. This page is updated with the end-of-day report and does not show live quotes. No real orders are placed. Weight changes are not applied without approval and at least 20 finished trades. Snapshot as of Thursday, Nov 19, 2026, 6:20 PM CT (end-of-day). Official end-of-day snapshot. Quotes are not live; this page is updated with the end-of-day report.</div>
   </div>
 </div>
+<script>
+(function () {
+  function svgX(svg, clientX) {
+    var ctm = svg.getScreenCTM();
+    if (!ctm) return null;
+    var pt = svg.createSVGPoint();
+    pt.x = clientX;
+    pt.y = 0;
+    return pt.matrixTransform(ctm.inverse()).x;
+  }
+
+  function nearest(points, x) {
+    var best = points[0], bestD = Infinity, i, d;
+    for (i = 0; i < points.length; i++) {
+      d = Math.abs(points[i].x - x);
+      if (d < bestD) { bestD = d; best = points[i]; }
+    }
+    return best;
+  }
+
+  function loadPoints(plot) {
+    var el = plot.querySelector(".chart-data");
+    if (!el) return [];
+    try { return JSON.parse(el.textContent || "[]"); } catch (err) { return []; }
+  }
+
+  function placeTip(plot, svg, tip, p) {
+    var ctm = svg.getScreenCTM();
+    if (!ctm) return;
+    var wrap = plot.getBoundingClientRect();
+    var pt = svg.createSVGPoint();
+    pt.x = p.x;
+    pt.y = p.y;
+    var scr = pt.matrixTransform(ctm);
+    var x = scr.x - wrap.left;
+    var y = scr.y - wrap.top;
+    tip.style.transform = "none";
+    tip.style.left = "0px";
+    tip.style.top = "0px";
+    var tw = tip.offsetWidth;
+    var th = tip.offsetHeight;
+    var left = x + 14;
+    var top = y - th - 12;
+    if (left + tw > wrap.width - 6) left = x - tw - 14;
+    if (left < 6) left = 6;
+    if (top < 6) top = y + 14;
+    if (top + th > wrap.height - 6) top = Math.max(6, wrap.height - th - 6);
+    tip.style.left = left + "px";
+    tip.style.top = top + "px";
+  }
+
+  function show(plot, p) {
+    var svg = plot.querySelector("svg");
+    var tip = plot.querySelector(".chart-tip");
+    var hover = plot.querySelector(".chart-hover");
+    var line = plot.querySelector(".chart-crosshair");
+    var dot = plot.querySelector(".chart-dot");
+    if (!svg || !tip || !hover || !line || !dot) return;
+    hover.setAttribute("visibility", "visible");
+    line.setAttribute("x1", p.x);
+    line.setAttribute("x2", p.x);
+    dot.setAttribute("cx", p.x);
+    dot.setAttribute("cy", p.y);
+    tip.hidden = false;
+    tip.innerHTML = "";
+    var dEl = document.createElement("div");
+    dEl.className = "chart-tip-date";
+    dEl.textContent = p.date;
+    var vEl = document.createElement("div");
+    vEl.className = "chart-tip-val";
+    vEl.textContent = p.value;
+    tip.appendChild(dEl);
+    tip.appendChild(vEl);
+    placeTip(plot, svg, tip, p);
+  }
+
+  function hide(plot) {
+    var hover = plot.querySelector(".chart-hover");
+    var tip = plot.querySelector(".chart-tip");
+    if (hover) hover.setAttribute("visibility", "hidden");
+    if (tip) tip.hidden = true;
+  }
+
+  function bind(plot) {
+    var points = loadPoints(plot);
+    if (!points.length) return;
+    var svg = plot.querySelector("svg");
+    if (!svg) return;
+    var dragging = false;
+
+    function atEvent(ev) {
+      var src = ev;
+      if (ev.touches && ev.touches.length) src = ev.touches[0];
+      else if (ev.changedTouches && ev.changedTouches.length) src = ev.changedTouches[0];
+      var x = svgX(svg, src.clientX);
+      if (x == null) return;
+      show(plot, nearest(points, x));
+    }
+
+    plot.addEventListener("pointerdown", function (ev) {
+      dragging = true;
+      try { plot.setPointerCapture(ev.pointerId); } catch (err) {}
+      atEvent(ev);
+    });
+    plot.addEventListener("pointermove", function (ev) {
+      if (ev.pointerType === "mouse" || dragging) atEvent(ev);
+    });
+    plot.addEventListener("pointerup", function () { dragging = false; });
+    plot.addEventListener("pointercancel", function () { dragging = false; });
+    plot.addEventListener("pointerleave", function (ev) {
+      if (ev.pointerType === "mouse") hide(plot);
+    });
+  }
+
+  document.addEventListener("pointerdown", function (ev) {
+    var cur = ev.target && ev.target.closest ? ev.target.closest(".chart-plot") : null;
+    document.querySelectorAll(".chart-plot").forEach(function (plot) {
+      if (plot !== cur) hide(plot);
+    });
+  });
+
+  document.querySelectorAll(".chart-plot").forEach(bind);
+})();
+
+</script>
 </body>
 </html>
