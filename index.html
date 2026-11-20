@@ -61,7 +61,7 @@ h1 { font-weight: 600; font-size: 26px; margin: 0; letter-spacing: -0.02em; }
 .chart .note { color: var(--mu); font-size: 11px; margin: 0 8px 8px; line-height: 1.45; }
 .chart svg { display: block; width: 100%; height: auto; }
 .poscard { margin: 0 0 var(--gap); }
-.poscard > h3, .sig-wrap h3, .heatcard h3, .tradecard h3, .wtcard h3, .riskcard h3 {
+.poscard > h3, .sig-wrap h3, .heatcard h3, .tradecard h3, .riskcard h3 {
   margin: 0 0 6px; font-size: 13px; font-weight: 650; text-transform: none; letter-spacing: 0; color: var(--tx); }
 .note { color: var(--mu); font-size: 11px; line-height: 1.45; margin: 0 0 10px; }
 table { width: 100%; border-collapse: collapse; font-size: 13px; }
@@ -84,11 +84,22 @@ tr.total td { border-bottom: 0; border-top: 1px solid #2A3548; font-weight: 650;
 .cfill { position: absolute; top: 0; bottom: 0; opacity: 0.85; }
 .cv { font-size: 10px; font-variant-numeric: tabular-nums; }
 .sig-notes { font-size: 11px; color: var(--mu); margin-top: 6px; }
-.bottom { display: grid; grid-template-columns: 3fr 1fr; gap: var(--gap); align-items: start; margin-bottom: var(--gap); }
-.leftcol { display: flex; flex-direction: column; gap: var(--gap); }
-.heatcard, .tradecard, .wtcard, .riskcard { margin: 0; }
-.wtcard { align-self: start; }
-.heatcard, .tradecard, .wtcard { display: flex; flex-direction: column; }
+.bottom { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); align-items: stretch; margin-bottom: var(--gap); }
+.heatcard, .tradecard, .riskcard { margin: 0; }
+.heatcard, .tradecard { display: flex; flex-direction: column; min-height: 0; }
+.tradecard { height: 0; min-height: 100%; overflow: hidden; }
+.closed-list { flex: 1; min-height: 0; overflow-y: auto;
+  scrollbar-width: thin; scrollbar-color: #2A3548 transparent; }
+.closed-list::-webkit-scrollbar { width: 8px; }
+.closed-list::-webkit-scrollbar-track { background: transparent; }
+.closed-list::-webkit-scrollbar-thumb { background: #2A3548; border-radius: 8px; }
+.closed-list::-webkit-scrollbar-thumb:hover { background: #3A4558; }
+.closed-row { padding: 10px 8px 10px 0; border-bottom: 1px solid #1e2636; }
+.closed-row:last-child { border-bottom: 0; }
+.cr-top { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
+.cr-name { font-weight: 650; font-size: 13px; }
+.cr-pnl { font-variant-numeric: tabular-nums; font-weight: 650; font-size: 13px; white-space: nowrap; }
+.cr-meta { font-size: 11px; color: var(--mu); margin-top: 3px; line-height: 1.45; }
 .empty-panel { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
   text-align: center; min-height: 160px; border: 1px dashed #2A3548; border-radius: 12px; padding: 28px 22px; color: #8A93A6; }
 .empty-panel .eh { font-size: 14px; font-weight: 650; color: #E7ECF5; margin: 0 0 8px; }
@@ -122,6 +133,7 @@ tr.total td { border-bottom: 0; border-top: 1px solid #2A3548; font-weight: 650;
   .heat-wrap { width: 100%; overflow: hidden; }
   .heat-wrap svg { display: block; width: 100%; height: auto; max-width: 100%; }
   .bottom { grid-template-columns: 1fr; }
+  .tradecard { height: auto; min-height: 0; overflow: visible; }
   .empty-panel { min-height: 140px; padding: 20px 14px; }
   .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
   .table-scroll table { min-width: 860px; }
@@ -130,6 +142,7 @@ tr.total td { border-bottom: 0; border-top: 1px solid #2A3548; font-weight: 650;
 @media (max-width: 600px) {
   .sig-bars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
   .comp { flex: none; min-width: 0; width: auto; }
+  .closed-list { max-height: 320px; }
 }
 
 </style>
@@ -145,7 +158,7 @@ tr.total td { border-bottom: 0; border-top: 1px solid #2A3548; font-weight: 650;
           <h1>Options Paper Bot – Live Paper Dashboard</h1>
         </div>
         <div class="sub">Paper ledger · America/Chicago · Thursday, Nov 19, 2026 · last mark Thu 11/19, 4:35 PM CT. Paper only — no real orders.</div>
-        <div class="updated">Last updated Thursday, Nov 19, 2026, 5:54 PM CT (end-of-day)</div>
+        <div class="updated">Last updated Thursday, Nov 19, 2026, 6:03 PM CT (end-of-day)</div>
       </div>
       <div class="pills">
         <span class="pill paper">Paper only</span>
@@ -181,33 +194,25 @@ tr.total td { border-bottom: 0; border-top: 1px solid #2A3548; font-weight: 650;
     </div>
 
     <div class="bottom">
-      <div class="leftcol">
-        <div class="card tradecard">
-          <h3>Closed trades and debriefs</h3>
-          <p class="note">Every closed fill gets a debrief and a lessons note. Newest exit first.</p>
-          <div class="empty-panel"><div class="eh">No closed paper trades yet</div><p>All current positions are still open. When a trade is closed, its debrief and lessons will appear here.</p></div>
+      <div class="card heatcard">
+        <h3>Weekly returns</h3>
+        <p class="note">One square per live week, like the G1 dashboard (green up, red down). Color scale is clipped at ±8%. A gold outline marks a week that is still in progress. Live journal only — weeks before the book started and future weeks are unmarked. Official daily marks for this week are listed under the grid.</p>
+        <div class="heat-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 900 72" role="img" aria-label="Weekly paper returns calendar"><text x="38" y="37" text-anchor="end" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">2026</text><rect x="44" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="60" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="76" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="92" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="108" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="124" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="140" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="156" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="172" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="188" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="204" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="220" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="236" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="252" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="268" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="284" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="300" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="316" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="332" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="348" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="364" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="380" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="396" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="412" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="428" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="444" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="460" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="476" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="492" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="508" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="524" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="540" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="556" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="572" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="588" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="604" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="620" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="636" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="652" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="668" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="684" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="700" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="716" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="732" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="748" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="764" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="780" y="22" width="13" height="22" rx="3" fill="#3EE0A0" fill-opacity="1.00" stroke="#F0C14B" stroke-width="1.5"/><rect x="796" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="812" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="828" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="844" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="860" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="876" y="22" width="13" height="22" rx="3" fill="#1A2233"/><text x="44" y="64" fill="#8A93A6" font-size="10" font-family="system-ui, sans-serif">Jan</text><text x="108" y="64" fill="#8A93A6" font-size="10" font-family="system-ui, sans-serif">Feb</text><text x="172" y="64" fill="#8A93A6" font-size="10" font-family="system-ui, sans-serif">Mar</text><text x="252" y="64" fill="#8A93A6" font-size="10" font-family="system-ui, sans-serif">Apr</text><text x="316" y="64" fill="#8A93A6" font-size="10" font-family="system-ui, sans-serif">May</text><text x="396" y="64" fill="#8A93A6" font-size="10" font-family="system-ui, sans-serif">Jun</text><text x="460" y="64" fill="#8A93A6" font-size="10" font-family="system-ui, sans-serif">Jul</text><text x="524" y="64" fill="#8A93A6" font-size="10" font-family="system-ui, sans-serif">Aug</text><text x="604" y="64" fill="#8A93A6" font-size="10" font-family="system-ui, sans-serif">Sep</text><text x="668" y="64" fill="#8A93A6" font-size="10" font-family="system-ui, sans-serif">Oct</text><text x="732" y="64" fill="#8A93A6" font-size="10" font-family="system-ui, sans-serif">Nov</text><text x="812" y="64" fill="#8A93A6" font-size="10" font-family="system-ui, sans-serif">Dec</text></svg></div>
+        <div class="legend">
+          <span class="swatch"><i style="background:#1A2233"></i>No mark</span>
+          <span class="swatch"><i style="background:#3EE0A0"></i>Up week</span>
+          <span class="swatch"><i style="background:#FF6B7A"></i>Down week</span>
+          <span class="swatch"><i style="background:#3EE0A0;border:1.5px solid #F0C14B"></i>In progress</span>
         </div>
-        <div class="card heatcard">
-          <h3>Weekly returns</h3>
-          <p class="note">One square per live week, like the G1 dashboard (green up, red down). Color scale is clipped at ±8%. A gold outline marks a week that is still in progress. Live journal only — weeks before the book started and future weeks are unmarked. Official daily marks for this week are listed under the grid.</p>
-          <div class="heat-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 900 72" role="img" aria-label="Weekly paper returns calendar"><text x="38" y="37" text-anchor="end" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">2026</text><rect x="44" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="60" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="76" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="92" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="108" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="124" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="140" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="156" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="172" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="188" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="204" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="220" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="236" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="252" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="268" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="284" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="300" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="316" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="332" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="348" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="364" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="380" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="396" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="412" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="428" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="444" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="460" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="476" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="492" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="508" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="524" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="540" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="556" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="572" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="588" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="604" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="620" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="636" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="652" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="668" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="684" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="700" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="716" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="732" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="748" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="764" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="780" y="22" width="13" height="22" rx="3" fill="#3EE0A0" fill-opacity="1.00" stroke="#F0C14B" stroke-width="1.5"/><rect x="796" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="812" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="828" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="844" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="860" y="22" width="13" height="22" rx="3" fill="#1A2233"/><rect x="876" y="22" width="13" height="22" rx="3" fill="#1A2233"/><text x="44" y="64" fill="#8A93A6" font-size="10" font-family="system-ui, sans-serif">Jan</text><text x="108" y="64" fill="#8A93A6" font-size="10" font-family="system-ui, sans-serif">Feb</text><text x="172" y="64" fill="#8A93A6" font-size="10" font-family="system-ui, sans-serif">Mar</text><text x="252" y="64" fill="#8A93A6" font-size="10" font-family="system-ui, sans-serif">Apr</text><text x="316" y="64" fill="#8A93A6" font-size="10" font-family="system-ui, sans-serif">May</text><text x="396" y="64" fill="#8A93A6" font-size="10" font-family="system-ui, sans-serif">Jun</text><text x="460" y="64" fill="#8A93A6" font-size="10" font-family="system-ui, sans-serif">Jul</text><text x="524" y="64" fill="#8A93A6" font-size="10" font-family="system-ui, sans-serif">Aug</text><text x="604" y="64" fill="#8A93A6" font-size="10" font-family="system-ui, sans-serif">Sep</text><text x="668" y="64" fill="#8A93A6" font-size="10" font-family="system-ui, sans-serif">Oct</text><text x="732" y="64" fill="#8A93A6" font-size="10" font-family="system-ui, sans-serif">Nov</text><text x="812" y="64" fill="#8A93A6" font-size="10" font-family="system-ui, sans-serif">Dec</text></svg></div>
-          <div class="legend">
-            <span class="swatch"><i style="background:#1A2233"></i>No mark</span>
-            <span class="swatch"><i style="background:#3EE0A0"></i>Up week</span>
-            <span class="swatch"><i style="background:#FF6B7A"></i>Down week</span>
-            <span class="swatch"><i style="background:#3EE0A0;border:1.5px solid #F0C14B"></i>In progress</span>
-          </div>
-          <p class="note">Week of 11/16 (ISO week 47, in progress): +16.82% vs the +5% target of $10,500.00, +$1,181.91 versus path. Official week mark is Friday.</p>
-          <p class="note">Official daily marks this week: Mon 11/16 Start $10,000.00; Tue 11/17 +6.56% to $10,655.91; Wed 11/18 −4.67% to $10,157.91; Thu 11/19 +15.00% to $11,681.91; Fri 11/20 Not closed yet.</p>
-        </div>
+        <p class="note">Week of 11/16 (ISO week 47, in progress): +16.82% vs the +5% target of $10,500.00, +$1,181.91 versus path. Official week mark is Friday.</p>
+        <p class="note">Official daily marks this week: Mon 11/16 Start $10,000.00; Tue 11/17 +6.56% to $10,655.91; Wed 11/18 −4.67% to $10,157.91; Thu 11/19 +15.00% to $11,681.91; Fri 11/20 Not closed yet.</p>
       </div>
-      <div class="card wtcard">
-        <h3>Signal weights</h3>
-        <p class="note">Entry at 70 (puts ≤ 30), full size at 80. After the weekly target: 85 and 0.25× size. Weight changes need approval and at least 20 closed trades.</p>
-        <table class="tight">
-          <thead><tr><th>Signal</th><th class="r">Points</th><th>What it measures</th></tr></thead>
-          <tbody><tr><td>Flow</td><td class="r">30</td><td>Unusual Whales flow / net premium / sweeps</td></tr><tr><td>Technicals</td><td class="r">25</td><td>Trend, RSI, VWAP, support/resistance, ATR room</td></tr><tr><td>Market</td><td class="r">15</td><td>Market Tide, SPY trend, VIX regime, put/call</td></tr><tr><td>GEX / dark pool</td><td class="r">10</td><td>Dealer gamma levels, dark pool</td></tr><tr><td>X sentiment</td><td class="r">10</td><td>Bullish vs bearish posts</td></tr><tr><td>News / catalyst</td><td class="r">10</td><td>News and earnings/macro catalysts</td></tr></tbody>
-        </table>
+      <div class="card tradecard">
+        <h3>Closed trades</h3>
+        <p class="note">Newest exit first. Paper fills only — no live quotes.</p>
+        <div class="closed-list">
+          <div class="empty-panel"><div class="eh">No closed paper trades yet</div><p>All current positions are still open. Closed trades will appear here.</p></div>
+        </div>
       </div>
     </div>
 
@@ -220,7 +225,7 @@ tr.total td { border-bottom: 0; border-top: 1px solid #2A3548; font-weight: 650;
       </table></div>
     </div>
 
-    <div class="foot">Paper ledger only, starting at $10,000.00 on 11/16. Buys fill at mid plus 25% of the spread; marks are the latest Robinhood mid at the end-of-day snapshot. A simulated exit would fill below mid. Official daily equity is the last snapshot of each session. This page is updated with the end-of-day report and does not show live quotes. No real orders are placed. Weight changes are not applied without approval and at least 20 finished trades. Snapshot as of Thursday, Nov 19, 2026, 5:54 PM CT (end-of-day). Official end-of-day snapshot. Quotes are not live; this page is updated with the end-of-day report.</div>
+    <div class="foot">Paper ledger only, starting at $10,000.00 on 11/16. Buys fill at mid plus 25% of the spread; marks are the latest Robinhood mid at the end-of-day snapshot. A simulated exit would fill below mid. Official daily equity is the last snapshot of each session. This page is updated with the end-of-day report and does not show live quotes. No real orders are placed. Weight changes are not applied without approval and at least 20 finished trades. Snapshot as of Thursday, Nov 19, 2026, 6:03 PM CT (end-of-day). Official end-of-day snapshot. Quotes are not live; this page is updated with the end-of-day report.</div>
   </div>
 </div>
 </body>
