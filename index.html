@@ -40,9 +40,9 @@ h1 { font-weight: 600; font-size: 26px; margin: 0; letter-spacing: -0.02em; }
 .brand { display: flex; align-items: center; gap: 12px; }
 .logo { width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0; display: block; background: #0A0E17; }
 .kpis { display: grid; gap: var(--gap); margin-bottom: var(--gap); }
-.kpis.live { grid-template-columns: repeat(7, 1fr); }
-.kpis.live .card { padding: 12px 12px; }
-.kpis.live .card .v { font-size: 20px; }
+.kpis.live { grid-template-columns: repeat(4, 1fr); }
+.kpis.live .card { padding: 12px 14px; }
+.kpis.live .card .v { font-size: 22px; }
 .card { background: var(--card); border: 1px solid var(--bd); border-radius: 14px; padding: 14px 16px; }
 .card h3 { margin: 0 0 2px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mu); }
 .card .v { font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif; font-size: 22px; font-weight: 600; letter-spacing: -0.03em; margin-top: 6px; }
@@ -57,7 +57,18 @@ h1 { font-weight: 600; font-size: 26px; margin: 0; letter-spacing: -0.02em; }
 .callout.warn { background: #2a210c; border-color: #6a5420; }
 .callout .lead { font-weight: 650; color: var(--gold); margin-bottom: 4px; }
 .chart { background: var(--card); border: 1px solid var(--bd); border-radius: 14px; padding: 12px 12px 14px; margin-bottom: var(--gap); overflow: visible; }
-.chart h3 { margin: 0 0 6px 8px; font-size: 13px; font-weight: 600; text-transform: none; letter-spacing: 0; color: var(--tx); }
+.chart-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px 14px; margin: 0 0 6px 8px; flex-wrap: wrap; }
+.chart h3 { margin: 0; font-size: 13px; font-weight: 600; text-transform: none; letter-spacing: 0; color: var(--tx); }
+.chart-controls { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex-shrink: 0; }
+.chart-ranges { display: inline-flex; border: 1px solid var(--bd); border-radius: 999px; overflow: hidden; background: var(--card2); }
+.range-btn { appearance: none; -webkit-appearance: none; border: 0; background: transparent; color: var(--mu);
+  font: 650 11px/1 system-ui, "Segoe UI", sans-serif; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 6px 11px; margin: 0; cursor: pointer; }
+.range-btn + .range-btn { border-left: 1px solid var(--bd); }
+.range-btn:hover { color: var(--tx); }
+.range-btn.is-active { background: #1e2a3d; color: var(--tx); }
+.chart-range-note { margin: 0; color: var(--mu); font-size: 11px; line-height: 1.3; text-align: right; }
+.chart-range-note[hidden] { display: none !important; }
 .chart .note { color: var(--mu); font-size: 11px; margin: 0 8px 8px; line-height: 1.45; }
 .chart svg { display: block; width: 100%; height: auto; }
 .chart-plot { position: relative; }
@@ -138,7 +149,10 @@ tr.total td { border-bottom: 0; border-top: 1px solid #2A3548; font-weight: 650;
   .svg-mobile { display: block; }
   .svg-mobile svg { display: block; width: 100%; height: auto; max-width: 100%; }
   .chart { padding: 10px 8px 12px; overflow: visible; }
-  .chart h3 { margin-left: 4px; }
+  .chart-head { margin-left: 4px; margin-right: 4px; align-items: center; }
+  .chart-controls { align-items: flex-start; }
+  .chart-range-note { text-align: left; }
+  .chart h3 { margin-left: 0; }
   .chart .note { margin-left: 4px; margin-right: 4px; font-size: 11px; }
   .chart svg { display: block; width: 100%; height: auto; max-width: 100%; }
   .heat-wrap { width: 100%; overflow: hidden; }
@@ -169,7 +183,7 @@ tr.total td { border-bottom: 0; border-top: 1px solid #2A3548; font-weight: 650;
           <h1>Options Bot – Live Dashboard</h1>
         </div>
         <div class="sub">America/Chicago · Thursday, Nov 19, 2026 · last mark Thu 11/19, 4:35 PM CT.</div>
-        <div class="updated">Last updated Thursday, Nov 19, 2026, 6:27 PM CT (end-of-day)</div>
+        <div class="updated">Last updated Thursday, Nov 19, 2026, 7:30 PM CT (end-of-day)</div>
       </div>
       <div class="pills">
         <span class="pill live">Live book $11,681.91</span>
@@ -178,21 +192,27 @@ tr.total td { border-bottom: 0; border-top: 1px solid #2A3548; font-weight: 650;
     </div>
 
     <div class="section-label">Live book — current state</div>
-    <div class="kpis live"><div class="card"><h3>Equity</h3><div class="v pos">$11,681.91</div><div class="s">Cash $6,334.91 · start $10,000</div></div><div class="card"><h3>Day P&amp;L</h3><div class="v pos">+$1,524.00</div><div class="s">+15.00% from prior close $10,157.91</div></div><div class="card"><h3>Week P&amp;L</h3><div class="v pos">+$1,681.91</div><div class="s">+16.82% vs +5% target $10,500.00 · +$1,181.91 vs path</div></div><div class="card"><h3>Drawdown from HWM</h3><div class="v ">0.00%</div><div class="s">HWM $11,681.91 · kill if worse than −30%</div></div><div class="card"><h3>Deployed</h3><div class="v ">31.4%</div><div class="s">$3,665.00 premium vs 40% cap</div></div><div class="card"><h3>Positions</h3><div class="v warn">3 / 4</div><div class="s">Puts 3/3 · calls 0/3</div></div><div class="card"><h3>Throttle</h3><div class="v warn">ON</div><div class="s">Target hit · new entries 85+ at 0.25×</div></div></div>
+    <div class="kpis live"><div class="card"><h3>Equity</h3><div class="v pos">$11,681.91</div><div class="s">Cash $6,334.91 · start $10,000</div></div><div class="card"><h3>Day P&amp;L</h3><div class="v pos">+$1,524.00</div><div class="s">+15.00% from prior close $10,157.91</div></div><div class="card"><h3>Week P&amp;L</h3><div class="v pos">+$1,681.91</div><div class="s">+16.82% vs +5% target $10,500.00 · +$1,181.91 vs path</div></div><div class="card"><h3>All-Time P&amp;L</h3><div class="v pos">+$1,681.91</div><div class="s">+16.82% since 11/16 · $10,000 start</div></div><div class="card"><h3>Drawdown from HWM</h3><div class="v ">0.00%</div><div class="s">HWM $11,681.91 · kill if worse than −30%</div></div><div class="card"><h3>Deployed</h3><div class="v ">31.4%</div><div class="s">$3,665.00 premium vs 40% cap</div></div><div class="card"><h3>Positions</h3><div class="v warn">3 / 4</div><div class="s">Puts 3/3 · calls 0/3</div></div><div class="card"><h3>Throttle</h3><div class="v warn">ON</div><div class="s">Target hit · new entries 85+ at 0.25×</div></div></div>
     <div class="callout warn"><div class="lead">Weekly-target throttle is ON, and the put cap full.</div>Weekly-target throttle is ON. Equity is $11,681.91, +$1,181.91 versus this week's $10,500.00 path, so new entries need a score of 85 or higher at 0.25× size. 3 / 4 positions open (puts 3/3, calls 0/3). Put cap full. GOOGL 12/18 280P trail is armed after a $15.25 peak (+52.3%; 25% trail $11.44, +20% floor $12.01; effective stop $12.01). QQQ 12/11 660P trail is armed after a $28.00 peak (+50.8%; 25% trail $21.00, +20% floor $22.28; effective stop $22.28). PLTR 12/04 160P is not armed (peak $11.03, +36.7%) and is covered by the −35% stop at $5.25. The 60-minute opening grace keeps the −35% stop, 25% trail, and +20% floor off 8:30–9:29:59 AM CT; profit targets still fire.</div>
 
-    <div class="chart">
-      <h3>Equity · $10,000 start on 11/16</h3>
+    <div class="chart" data-chart="equity">
+      <div class="chart-head">
+        <h3>Equity · $10,000 start on 11/16</h3>
+        <div class="chart-controls"><div class="chart-ranges" role="group" aria-label="Equity timeframe"><button type="button" class="range-btn" data-range="wtd" aria-pressed="false">WTD</button><button type="button" class="range-btn" data-range="mtd" aria-pressed="false">MTD</button><button type="button" class="range-btn" data-range="ytd" aria-pressed="false">YTD</button><button type="button" class="range-btn is-active" data-range="all" aria-pressed="true">All</button></div><p class="chart-range-note" hidden></p></div>
+      </div>
       <p class="note">Official daily marks only: the last snapshot of each session. The gold line is this week's +5% target of $10,500.00. Live book only — no backtest path and no invented points.</p>
-      <div class="svg-desktop"><div class="chart-plot" data-kind="equity" id="chart-equity-desktop"><svg xmlns="http://www.w3.org/2000/svg" width="1320" height="300" viewBox="0 0 1320 300" role="img"><rect x="0" y="0" width="1320" height="300" fill="#121826"/><line x1="64" y1="264.0" x2="1302" y2="264.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="264.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$9,200</text><line x1="64" y1="202.0" x2="1302" y2="202.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="202.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$10,054</text><line x1="64" y1="140.0" x2="1302" y2="140.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="140.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$10,908</text><line x1="64" y1="78.0" x2="1302" y2="78.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="78.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$11,762</text><line x1="64" y1="16.0" x2="1302" y2="16.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="16.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$12,616</text><text x="64.0" y="288" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/16</text><text x="476.7" y="288" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/17</text><text x="889.3" y="288" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/18</text><text x="1302.0" y="288" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/19</text><line x1="64" y1="169.6" x2="1302" y2="169.6" stroke="#F0C14B" stroke-width="1.4" stroke-dasharray="6 5"/><text x="1302" y="163.6" text-anchor="end" fill="#F0C14B" font-size="11" font-family="system-ui, sans-serif">+5% target $10,500</text><path d="M 64.0,205.9 L 476.7,158.3 L 889.3,194.5 L 1302.0,83.8 L 1302.0,264.0 L 64.0,264.0 Z" fill="#5EE0D0" fill-opacity="0.12"/><path d="M 64.0,205.9 L 476.7,158.3 L 889.3,194.5 L 1302.0,83.8" fill="none" stroke="#5EE0D0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="64.0" cy="205.9" r="3.2" fill="#5EE0D0" stroke="#0A0E17" stroke-width="1.4"/><circle cx="476.7" cy="158.3" r="3.2" fill="#5EE0D0" stroke="#0A0E17" stroke-width="1.4"/><circle cx="889.3" cy="194.5" r="3.2" fill="#5EE0D0" stroke="#0A0E17" stroke-width="1.4"/><circle cx="1302.0" cy="83.8" r="3.2" fill="#5EE0D0" stroke="#0A0E17" stroke-width="1.4"/><g class="chart-hover" visibility="hidden" pointer-events="none"><line class="chart-crosshair" x1="0" x2="0" y1="16" y2="264" stroke="#E7ECF5" stroke-opacity="0.45" stroke-width="1"/><circle class="chart-dot" cx="0" cy="0" r="5.5" fill="#5EE0D0" stroke="#0A0E17" stroke-width="2"/></g></svg><div class="chart-tip" hidden></div><script type="application/json" class="chart-data">[{"x": 64.0, "y": 205.9, "date": "Mon 11/16", "value": "$10,000.00"}, {"x": 476.7, "y": 158.3, "date": "Tue 11/17", "value": "$10,655.91"}, {"x": 889.3, "y": 194.5, "date": "Wed 11/18", "value": "$10,157.91"}, {"x": 1302.0, "y": 83.8, "date": "Thu 11/19", "value": "$11,681.91"}]</script></div></div>
-      <div class="svg-mobile"><div class="chart-plot" data-kind="equity" id="chart-equity-mobile"><svg xmlns="http://www.w3.org/2000/svg" width="346" height="240" viewBox="0 0 346 240" role="img"><rect x="0" y="0" width="346" height="240" fill="#121826"/><line x1="64" y1="204.0" x2="328" y2="204.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="204.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$9,200</text><line x1="64" y1="157.0" x2="328" y2="157.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="157.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$10,054</text><line x1="64" y1="110.0" x2="328" y2="110.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="110.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$10,908</text><line x1="64" y1="63.0" x2="328" y2="63.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="63.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$11,762</text><line x1="64" y1="16.0" x2="328" y2="16.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="16.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$12,616</text><text x="64.0" y="228" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/16</text><text x="152.0" y="228" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/17</text><text x="240.0" y="228" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/18</text><text x="328.0" y="228" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/19</text><line x1="64" y1="132.5" x2="328" y2="132.5" stroke="#F0C14B" stroke-width="1.4" stroke-dasharray="6 5"/><text x="328" y="126.5" text-anchor="end" fill="#F0C14B" font-size="11" font-family="system-ui, sans-serif">+5% target $10,500</text><path d="M 64.0,160.0 L 152.0,123.9 L 240.0,151.3 L 328.0,67.4 L 328.0,204.0 L 64.0,204.0 Z" fill="#5EE0D0" fill-opacity="0.12"/><path d="M 64.0,160.0 L 152.0,123.9 L 240.0,151.3 L 328.0,67.4" fill="none" stroke="#5EE0D0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="64.0" cy="160.0" r="3.2" fill="#5EE0D0" stroke="#0A0E17" stroke-width="1.4"/><circle cx="152.0" cy="123.9" r="3.2" fill="#5EE0D0" stroke="#0A0E17" stroke-width="1.4"/><circle cx="240.0" cy="151.3" r="3.2" fill="#5EE0D0" stroke="#0A0E17" stroke-width="1.4"/><circle cx="328.0" cy="67.4" r="3.2" fill="#5EE0D0" stroke="#0A0E17" stroke-width="1.4"/><g class="chart-hover" visibility="hidden" pointer-events="none"><line class="chart-crosshair" x1="0" x2="0" y1="16" y2="204" stroke="#E7ECF5" stroke-opacity="0.45" stroke-width="1"/><circle class="chart-dot" cx="0" cy="0" r="5.5" fill="#5EE0D0" stroke="#0A0E17" stroke-width="2"/></g></svg><div class="chart-tip" hidden></div><script type="application/json" class="chart-data">[{"x": 64.0, "y": 160.0, "date": "Mon 11/16", "value": "$10,000.00"}, {"x": 152.0, "y": 123.9, "date": "Tue 11/17", "value": "$10,655.91"}, {"x": 240.0, "y": 151.3, "date": "Wed 11/18", "value": "$10,157.91"}, {"x": 328.0, "y": 67.4, "date": "Thu 11/19", "value": "$11,681.91"}]</script></div></div>
+      <div class="svg-desktop"><div class="chart-plot" data-kind="equity" id="chart-equity-desktop"><svg xmlns="http://www.w3.org/2000/svg" width="1320" height="300" viewBox="0 0 1320 300" role="img"><rect x="0" y="0" width="1320" height="300" fill="#121826"/><line x1="64" y1="264.0" x2="1302" y2="264.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="264.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$9,200</text><line x1="64" y1="202.0" x2="1302" y2="202.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="202.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$10,054</text><line x1="64" y1="140.0" x2="1302" y2="140.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="140.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$10,908</text><line x1="64" y1="78.0" x2="1302" y2="78.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="78.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$11,762</text><line x1="64" y1="16.0" x2="1302" y2="16.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="16.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$12,616</text><text x="64.0" y="288" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/16</text><text x="476.7" y="288" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/17</text><text x="889.3" y="288" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/18</text><text x="1302.0" y="288" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/19</text><line x1="64" y1="169.6" x2="1302" y2="169.6" stroke="#F0C14B" stroke-width="1.4" stroke-dasharray="6 5"/><text x="1302" y="163.6" text-anchor="end" fill="#F0C14B" font-size="11" font-family="system-ui, sans-serif">+5% target $10,500</text><path d="M 64.0,205.9 L 476.7,158.3 L 889.3,194.5 L 1302.0,83.8 L 1302.0,264.0 L 64.0,264.0 Z" fill="#5EE0D0" fill-opacity="0.12"/><path d="M 64.0,205.9 L 476.7,158.3 L 889.3,194.5 L 1302.0,83.8" fill="none" stroke="#5EE0D0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="64.0" cy="205.9" r="3.2" fill="#5EE0D0" stroke="#0A0E17" stroke-width="1.4"/><circle cx="476.7" cy="158.3" r="3.2" fill="#5EE0D0" stroke="#0A0E17" stroke-width="1.4"/><circle cx="889.3" cy="194.5" r="3.2" fill="#5EE0D0" stroke="#0A0E17" stroke-width="1.4"/><circle cx="1302.0" cy="83.8" r="3.2" fill="#5EE0D0" stroke="#0A0E17" stroke-width="1.4"/><g class="chart-hover" visibility="hidden" pointer-events="none"><line class="chart-crosshair" x1="0" x2="0" y1="16" y2="264" stroke="#E7ECF5" stroke-opacity="0.45" stroke-width="1"/><circle class="chart-dot" cx="0" cy="0" r="5.5" fill="#5EE0D0" stroke="#0A0E17" stroke-width="2"/></g></svg><div class="chart-tip" hidden></div><script type="application/json" class="chart-data">[{"x": 64.0, "y": 205.9, "date": "Mon 11/16", "value": "$10,000.00"}, {"x": 476.7, "y": 158.3, "date": "Tue 11/17", "value": "$10,655.91"}, {"x": 889.3, "y": 194.5, "date": "Wed 11/18", "value": "$10,157.91"}, {"x": 1302.0, "y": 83.8, "date": "Thu 11/19", "value": "$11,681.91"}]</script><script type="application/json" class="chart-series">{"kind": "equity", "width": 1320, "height": 300, "color": "#5EE0D0", "neg_color": "#FF6B7A", "pos_color": "#5EE0D0", "area": true, "pad": {"l": 64, "r": 18, "t": 16, "b": 36}, "palette": {"bg": "#0A0E17", "card": "#121826", "bd": "#2A3548", "mu": "#8A93A6"}, "extra_lines": [{"value": 10500.0, "color": "#F0C14B", "label": "+5% target $10,500", "dash": true}], "y_mode": "equity", "start_equity": 10000.0, "points": [{"date": "2026-11-16", "label": "11/16", "equity": 10000.0, "hwm": 10000.0, "drawdown_pct": 0.0}, {"date": "2026-11-17", "label": "11/17", "equity": 10655.91, "hwm": 10655.91, "drawdown_pct": 0.0}, {"date": "2026-11-18", "label": "11/18", "equity": 10157.91, "hwm": 10655.91, "drawdown_pct": -4.67}, {"date": "2026-11-19", "label": "11/19", "equity": 11681.91, "hwm": 11681.91, "drawdown_pct": 0.0}]}</script></div></div>
+      <div class="svg-mobile"><div class="chart-plot" data-kind="equity" id="chart-equity-mobile"><svg xmlns="http://www.w3.org/2000/svg" width="346" height="240" viewBox="0 0 346 240" role="img"><rect x="0" y="0" width="346" height="240" fill="#121826"/><line x1="64" y1="204.0" x2="328" y2="204.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="204.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$9,200</text><line x1="64" y1="157.0" x2="328" y2="157.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="157.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$10,054</text><line x1="64" y1="110.0" x2="328" y2="110.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="110.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$10,908</text><line x1="64" y1="63.0" x2="328" y2="63.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="63.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$11,762</text><line x1="64" y1="16.0" x2="328" y2="16.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="16.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">$12,616</text><text x="64.0" y="228" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/16</text><text x="152.0" y="228" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/17</text><text x="240.0" y="228" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/18</text><text x="328.0" y="228" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/19</text><line x1="64" y1="132.5" x2="328" y2="132.5" stroke="#F0C14B" stroke-width="1.4" stroke-dasharray="6 5"/><text x="328" y="126.5" text-anchor="end" fill="#F0C14B" font-size="11" font-family="system-ui, sans-serif">+5% target $10,500</text><path d="M 64.0,160.0 L 152.0,123.9 L 240.0,151.3 L 328.0,67.4 L 328.0,204.0 L 64.0,204.0 Z" fill="#5EE0D0" fill-opacity="0.12"/><path d="M 64.0,160.0 L 152.0,123.9 L 240.0,151.3 L 328.0,67.4" fill="none" stroke="#5EE0D0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="64.0" cy="160.0" r="3.2" fill="#5EE0D0" stroke="#0A0E17" stroke-width="1.4"/><circle cx="152.0" cy="123.9" r="3.2" fill="#5EE0D0" stroke="#0A0E17" stroke-width="1.4"/><circle cx="240.0" cy="151.3" r="3.2" fill="#5EE0D0" stroke="#0A0E17" stroke-width="1.4"/><circle cx="328.0" cy="67.4" r="3.2" fill="#5EE0D0" stroke="#0A0E17" stroke-width="1.4"/><g class="chart-hover" visibility="hidden" pointer-events="none"><line class="chart-crosshair" x1="0" x2="0" y1="16" y2="204" stroke="#E7ECF5" stroke-opacity="0.45" stroke-width="1"/><circle class="chart-dot" cx="0" cy="0" r="5.5" fill="#5EE0D0" stroke="#0A0E17" stroke-width="2"/></g></svg><div class="chart-tip" hidden></div><script type="application/json" class="chart-data">[{"x": 64.0, "y": 160.0, "date": "Mon 11/16", "value": "$10,000.00"}, {"x": 152.0, "y": 123.9, "date": "Tue 11/17", "value": "$10,655.91"}, {"x": 240.0, "y": 151.3, "date": "Wed 11/18", "value": "$10,157.91"}, {"x": 328.0, "y": 67.4, "date": "Thu 11/19", "value": "$11,681.91"}]</script><script type="application/json" class="chart-series">{"kind": "equity", "width": 346, "height": 240, "color": "#5EE0D0", "neg_color": "#FF6B7A", "pos_color": "#5EE0D0", "area": true, "pad": {"l": 64, "r": 18, "t": 16, "b": 36}, "palette": {"bg": "#0A0E17", "card": "#121826", "bd": "#2A3548", "mu": "#8A93A6"}, "extra_lines": [{"value": 10500.0, "color": "#F0C14B", "label": "+5% target $10,500", "dash": true}], "y_mode": "equity", "start_equity": 10000.0, "points": [{"date": "2026-11-16", "label": "11/16", "equity": 10000.0, "hwm": 10000.0, "drawdown_pct": 0.0}, {"date": "2026-11-17", "label": "11/17", "equity": 10655.91, "hwm": 10655.91, "drawdown_pct": 0.0}, {"date": "2026-11-18", "label": "11/18", "equity": 10157.91, "hwm": 10655.91, "drawdown_pct": -4.67}, {"date": "2026-11-19", "label": "11/19", "equity": 11681.91, "hwm": 11681.91, "drawdown_pct": 0.0}]}</script></div></div>
     </div>
 
-    <div class="chart">
-      <h3>Drawdown from prior peak</h3>
+    <div class="chart" data-chart="drawdown">
+      <div class="chart-head">
+        <h3>Drawdown from prior peak</h3>
+        <div class="chart-controls"><div class="chart-ranges" role="group" aria-label="Drawdown timeframe"><button type="button" class="range-btn" data-range="wtd" aria-pressed="false">WTD</button><button type="button" class="range-btn" data-range="mtd" aria-pressed="false">MTD</button><button type="button" class="range-btn" data-range="ytd" aria-pressed="false">YTD</button><button type="button" class="range-btn is-active" data-range="all" aria-pressed="true">All</button></div><p class="chart-range-note" hidden></p></div>
+      </div>
       <p class="note">Official end-of-day drawdown from the running high-water mark. The kill switch fires at −30% from the live peak ($8,177.34 at the current HWM).</p>
-      <div class="svg-desktop"><div class="chart-plot" data-kind="drawdown_pct" id="chart-drawdown-desktop"><svg xmlns="http://www.w3.org/2000/svg" width="1320" height="200" viewBox="0 0 1320 200" role="img"><rect x="0" y="0" width="1320" height="200" fill="#121826"/><line x1="64" y1="164.0" x2="1302" y2="164.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="164.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">−35%</text><line x1="64" y1="127.0" x2="1302" y2="127.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="127.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">−26%</text><line x1="64" y1="90.0" x2="1302" y2="90.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="90.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">−16%</text><line x1="64" y1="53.0" x2="1302" y2="53.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="53.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">−7%</text><line x1="64" y1="16.0" x2="1302" y2="16.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="16.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">+2%</text><text x="64.0" y="188" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/16</text><text x="476.7" y="188" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/17</text><text x="889.3" y="188" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/18</text><text x="1302.0" y="188" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/19</text><line x1="64" y1="144.0" x2="1302" y2="144.0" stroke="#FF6B7A" stroke-width="1.4" stroke-dasharray="6 5"/><text x="1302" y="138.0" text-anchor="end" fill="#FF6B7A" font-size="11" font-family="system-ui, sans-serif">Kill −30%</text><path d="M 64.0,24.0 L 476.7,24.0 L 889.3,42.7 L 1302.0,24.0 L 1302.0,24.0 L 64.0,24.0 Z" fill="#FF6B7A" fill-opacity="0.12"/><path d="M 64.0,24.0 L 476.7,24.0 L 889.3,42.7 L 1302.0,24.0" fill="none" stroke="#FF6B7A" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="64.0" cy="24.0" r="3.2" fill="#FF6B7A" stroke="#0A0E17" stroke-width="1.4"/><circle cx="476.7" cy="24.0" r="3.2" fill="#FF6B7A" stroke="#0A0E17" stroke-width="1.4"/><circle cx="889.3" cy="42.7" r="3.2" fill="#FF6B7A" stroke="#0A0E17" stroke-width="1.4"/><circle cx="1302.0" cy="24.0" r="3.2" fill="#FF6B7A" stroke="#0A0E17" stroke-width="1.4"/><g class="chart-hover" visibility="hidden" pointer-events="none"><line class="chart-crosshair" x1="0" x2="0" y1="16" y2="164" stroke="#E7ECF5" stroke-opacity="0.45" stroke-width="1"/><circle class="chart-dot" cx="0" cy="0" r="5.5" fill="#FF6B7A" stroke="#0A0E17" stroke-width="2"/></g></svg><div class="chart-tip" hidden></div><script type="application/json" class="chart-data">[{"x": 64.0, "y": 24.0, "date": "Mon 11/16", "value": "0.00% (+$0.00)"}, {"x": 476.7, "y": 24.0, "date": "Tue 11/17", "value": "0.00% (+$0.00)"}, {"x": 889.3, "y": 42.7, "date": "Wed 11/18", "value": "−4.67% (−$498.00)"}, {"x": 1302.0, "y": 24.0, "date": "Thu 11/19", "value": "0.00% (+$0.00)"}]</script></div></div>
-      <div class="svg-mobile"><div class="chart-plot" data-kind="drawdown_pct" id="chart-drawdown-mobile"><svg xmlns="http://www.w3.org/2000/svg" width="346" height="180" viewBox="0 0 346 180" role="img"><rect x="0" y="0" width="346" height="180" fill="#121826"/><line x1="64" y1="144.0" x2="328" y2="144.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="144.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">−35%</text><line x1="64" y1="112.0" x2="328" y2="112.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="112.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">−26%</text><line x1="64" y1="80.0" x2="328" y2="80.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="80.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">−16%</text><line x1="64" y1="48.0" x2="328" y2="48.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="48.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">−7%</text><line x1="64" y1="16.0" x2="328" y2="16.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="16.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">+2%</text><text x="64.0" y="168" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/16</text><text x="152.0" y="168" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/17</text><text x="240.0" y="168" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/18</text><text x="328.0" y="168" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/19</text><line x1="64" y1="126.7" x2="328" y2="126.7" stroke="#FF6B7A" stroke-width="1.4" stroke-dasharray="6 5"/><text x="328" y="120.7" text-anchor="end" fill="#FF6B7A" font-size="11" font-family="system-ui, sans-serif">Kill −30%</text><path d="M 64.0,22.9 L 152.0,22.9 L 240.0,39.1 L 328.0,22.9 L 328.0,22.9 L 64.0,22.9 Z" fill="#FF6B7A" fill-opacity="0.12"/><path d="M 64.0,22.9 L 152.0,22.9 L 240.0,39.1 L 328.0,22.9" fill="none" stroke="#FF6B7A" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="64.0" cy="22.9" r="3.2" fill="#FF6B7A" stroke="#0A0E17" stroke-width="1.4"/><circle cx="152.0" cy="22.9" r="3.2" fill="#FF6B7A" stroke="#0A0E17" stroke-width="1.4"/><circle cx="240.0" cy="39.1" r="3.2" fill="#FF6B7A" stroke="#0A0E17" stroke-width="1.4"/><circle cx="328.0" cy="22.9" r="3.2" fill="#FF6B7A" stroke="#0A0E17" stroke-width="1.4"/><g class="chart-hover" visibility="hidden" pointer-events="none"><line class="chart-crosshair" x1="0" x2="0" y1="16" y2="144" stroke="#E7ECF5" stroke-opacity="0.45" stroke-width="1"/><circle class="chart-dot" cx="0" cy="0" r="5.5" fill="#FF6B7A" stroke="#0A0E17" stroke-width="2"/></g></svg><div class="chart-tip" hidden></div><script type="application/json" class="chart-data">[{"x": 64.0, "y": 22.9, "date": "Mon 11/16", "value": "0.00% (+$0.00)"}, {"x": 152.0, "y": 22.9, "date": "Tue 11/17", "value": "0.00% (+$0.00)"}, {"x": 240.0, "y": 39.1, "date": "Wed 11/18", "value": "−4.67% (−$498.00)"}, {"x": 328.0, "y": 22.9, "date": "Thu 11/19", "value": "0.00% (+$0.00)"}]</script></div></div>
+      <div class="svg-desktop"><div class="chart-plot" data-kind="drawdown_pct" id="chart-drawdown-desktop"><svg xmlns="http://www.w3.org/2000/svg" width="1320" height="200" viewBox="0 0 1320 200" role="img"><rect x="0" y="0" width="1320" height="200" fill="#121826"/><line x1="64" y1="164.0" x2="1302" y2="164.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="164.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">−35%</text><line x1="64" y1="127.0" x2="1302" y2="127.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="127.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">−26%</text><line x1="64" y1="90.0" x2="1302" y2="90.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="90.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">−16%</text><line x1="64" y1="53.0" x2="1302" y2="53.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="53.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">−7%</text><line x1="64" y1="16.0" x2="1302" y2="16.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="16.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">+2%</text><text x="64.0" y="188" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/16</text><text x="476.7" y="188" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/17</text><text x="889.3" y="188" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/18</text><text x="1302.0" y="188" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/19</text><line x1="64" y1="144.0" x2="1302" y2="144.0" stroke="#FF6B7A" stroke-width="1.4" stroke-dasharray="6 5"/><text x="1302" y="138.0" text-anchor="end" fill="#FF6B7A" font-size="11" font-family="system-ui, sans-serif">Kill −30%</text><path d="M 64.0,24.0 L 476.7,24.0 L 889.3,42.7 L 1302.0,24.0 L 1302.0,24.0 L 64.0,24.0 Z" fill="#FF6B7A" fill-opacity="0.12"/><path d="M 64.0,24.0 L 476.7,24.0 L 889.3,42.7 L 1302.0,24.0" fill="none" stroke="#FF6B7A" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="64.0" cy="24.0" r="3.2" fill="#FF6B7A" stroke="#0A0E17" stroke-width="1.4"/><circle cx="476.7" cy="24.0" r="3.2" fill="#FF6B7A" stroke="#0A0E17" stroke-width="1.4"/><circle cx="889.3" cy="42.7" r="3.2" fill="#FF6B7A" stroke="#0A0E17" stroke-width="1.4"/><circle cx="1302.0" cy="24.0" r="3.2" fill="#FF6B7A" stroke="#0A0E17" stroke-width="1.4"/><g class="chart-hover" visibility="hidden" pointer-events="none"><line class="chart-crosshair" x1="0" x2="0" y1="16" y2="164" stroke="#E7ECF5" stroke-opacity="0.45" stroke-width="1"/><circle class="chart-dot" cx="0" cy="0" r="5.5" fill="#FF6B7A" stroke="#0A0E17" stroke-width="2"/></g></svg><div class="chart-tip" hidden></div><script type="application/json" class="chart-data">[{"x": 64.0, "y": 24.0, "date": "Mon 11/16", "value": "0.00% (+$0.00)"}, {"x": 476.7, "y": 24.0, "date": "Tue 11/17", "value": "0.00% (+$0.00)"}, {"x": 889.3, "y": 42.7, "date": "Wed 11/18", "value": "−4.67% (−$498.00)"}, {"x": 1302.0, "y": 24.0, "date": "Thu 11/19", "value": "0.00% (+$0.00)"}]</script><script type="application/json" class="chart-series">{"kind": "drawdown_pct", "width": 1320, "height": 200, "color": "#FF6B7A", "neg_color": "#FF6B7A", "pos_color": "#5EE0D0", "area": true, "pad": {"l": 64, "r": 18, "t": 16, "b": 36}, "palette": {"bg": "#0A0E17", "card": "#121826", "bd": "#2A3548", "mu": "#8A93A6"}, "extra_lines": [{"value": -30, "color": "#FF6B7A", "label": "Kill −30%", "dash": true}], "y_mode": "drawdown", "start_equity": 10000.0, "points": [{"date": "2026-11-16", "label": "11/16", "equity": 10000.0, "hwm": 10000.0, "drawdown_pct": 0.0}, {"date": "2026-11-17", "label": "11/17", "equity": 10655.91, "hwm": 10655.91, "drawdown_pct": 0.0}, {"date": "2026-11-18", "label": "11/18", "equity": 10157.91, "hwm": 10655.91, "drawdown_pct": -4.67}, {"date": "2026-11-19", "label": "11/19", "equity": 11681.91, "hwm": 11681.91, "drawdown_pct": 0.0}]}</script></div></div>
+      <div class="svg-mobile"><div class="chart-plot" data-kind="drawdown_pct" id="chart-drawdown-mobile"><svg xmlns="http://www.w3.org/2000/svg" width="346" height="180" viewBox="0 0 346 180" role="img"><rect x="0" y="0" width="346" height="180" fill="#121826"/><line x1="64" y1="144.0" x2="328" y2="144.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="144.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">−35%</text><line x1="64" y1="112.0" x2="328" y2="112.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="112.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">−26%</text><line x1="64" y1="80.0" x2="328" y2="80.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="80.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">−16%</text><line x1="64" y1="48.0" x2="328" y2="48.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="48.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">−7%</text><line x1="64" y1="16.0" x2="328" y2="16.0" stroke="#2A3548" stroke-width="1"/><text x="56" y="16.0" text-anchor="end" dominant-baseline="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">+2%</text><text x="64.0" y="168" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/16</text><text x="152.0" y="168" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/17</text><text x="240.0" y="168" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/18</text><text x="328.0" y="168" text-anchor="middle" fill="#8A93A6" font-size="11" font-family="system-ui, sans-serif">11/19</text><line x1="64" y1="126.7" x2="328" y2="126.7" stroke="#FF6B7A" stroke-width="1.4" stroke-dasharray="6 5"/><text x="328" y="120.7" text-anchor="end" fill="#FF6B7A" font-size="11" font-family="system-ui, sans-serif">Kill −30%</text><path d="M 64.0,22.9 L 152.0,22.9 L 240.0,39.1 L 328.0,22.9 L 328.0,22.9 L 64.0,22.9 Z" fill="#FF6B7A" fill-opacity="0.12"/><path d="M 64.0,22.9 L 152.0,22.9 L 240.0,39.1 L 328.0,22.9" fill="none" stroke="#FF6B7A" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="64.0" cy="22.9" r="3.2" fill="#FF6B7A" stroke="#0A0E17" stroke-width="1.4"/><circle cx="152.0" cy="22.9" r="3.2" fill="#FF6B7A" stroke="#0A0E17" stroke-width="1.4"/><circle cx="240.0" cy="39.1" r="3.2" fill="#FF6B7A" stroke="#0A0E17" stroke-width="1.4"/><circle cx="328.0" cy="22.9" r="3.2" fill="#FF6B7A" stroke="#0A0E17" stroke-width="1.4"/><g class="chart-hover" visibility="hidden" pointer-events="none"><line class="chart-crosshair" x1="0" x2="0" y1="16" y2="144" stroke="#E7ECF5" stroke-opacity="0.45" stroke-width="1"/><circle class="chart-dot" cx="0" cy="0" r="5.5" fill="#FF6B7A" stroke="#0A0E17" stroke-width="2"/></g></svg><div class="chart-tip" hidden></div><script type="application/json" class="chart-data">[{"x": 64.0, "y": 22.9, "date": "Mon 11/16", "value": "0.00% (+$0.00)"}, {"x": 152.0, "y": 22.9, "date": "Tue 11/17", "value": "0.00% (+$0.00)"}, {"x": 240.0, "y": 39.1, "date": "Wed 11/18", "value": "−4.67% (−$498.00)"}, {"x": 328.0, "y": 22.9, "date": "Thu 11/19", "value": "0.00% (+$0.00)"}]</script><script type="application/json" class="chart-series">{"kind": "drawdown_pct", "width": 346, "height": 180, "color": "#FF6B7A", "neg_color": "#FF6B7A", "pos_color": "#5EE0D0", "area": true, "pad": {"l": 64, "r": 18, "t": 16, "b": 36}, "palette": {"bg": "#0A0E17", "card": "#121826", "bd": "#2A3548", "mu": "#8A93A6"}, "extra_lines": [{"value": -30, "color": "#FF6B7A", "label": "Kill −30%", "dash": true}], "y_mode": "drawdown", "start_equity": 10000.0, "points": [{"date": "2026-11-16", "label": "11/16", "equity": 10000.0, "hwm": 10000.0, "drawdown_pct": 0.0}, {"date": "2026-11-17", "label": "11/17", "equity": 10655.91, "hwm": 10655.91, "drawdown_pct": 0.0}, {"date": "2026-11-18", "label": "11/18", "equity": 10157.91, "hwm": 10655.91, "drawdown_pct": -4.67}, {"date": "2026-11-19", "label": "11/19", "equity": 11681.91, "hwm": 11681.91, "drawdown_pct": 0.0}]}</script></div></div>
     </div>
 
     <div class="card poscard">
@@ -235,7 +255,7 @@ tr.total td { border-bottom: 0; border-top: 1px solid #2A3548; font-weight: 650;
       </table></div>
     </div>
 
-    <div class="foot">Starting at $10,000.00 on 11/16. Buys fill at mid plus 25% of the spread; marks are the latest Robinhood mid at the end-of-day snapshot. A simulated exit would fill below mid. Official daily equity is the last snapshot of each session. This page is updated with the end-of-day report and does not show live quotes. Weight changes are not applied without approval and at least 20 finished trades. Snapshot as of Thursday, Nov 19, 2026, 6:27 PM CT (end-of-day). Official end-of-day snapshot. Quotes are not live; this page is updated with the end-of-day report.</div>
+    <div class="foot">Starting at $10,000.00 on 11/16. Buys fill at mid plus 25% of the spread; marks are the latest Robinhood mid at the end-of-day snapshot. A simulated exit would fill below mid. Official daily equity is the last snapshot of each session. This page is updated with the end-of-day report and does not show live quotes. Weight changes are not applied without approval and at least 20 finished trades. Snapshot as of Thursday, Nov 19, 2026, 7:30 PM CT (end-of-day). Official end-of-day snapshot. Quotes are not live; this page is updated with the end-of-day report.</div>
   </div>
 </div>
 <script>
@@ -322,13 +342,16 @@ tr.total td { border-bottom: 0; border-top: 1px solid #2A3548; font-weight: 650;
   }
 
   function bind(plot) {
-    var points = loadPoints(plot);
-    if (!points.length) return;
-    var svg = plot.querySelector("svg");
-    if (!svg) return;
+    if (plot.getAttribute("data-hover-bound") === "1") return;
+    if (!plot.querySelector("svg")) return;
+    plot.setAttribute("data-hover-bound", "1");
     var dragging = false;
 
     function atEvent(ev) {
+      var points = loadPoints(plot);
+      if (!points.length) return;
+      var svg = plot.querySelector("svg");
+      if (!svg) return;
       var src = ev;
       if (ev.touches && ev.touches.length) src = ev.touches[0];
       else if (ev.changedTouches && ev.changedTouches.length) src = ev.changedTouches[0];
@@ -360,6 +383,272 @@ tr.total td { border-bottom: 0; border-top: 1px solid #2A3548; font-weight: 650;
   });
 
   document.querySelectorAll(".chart-plot").forEach(bind);
+})();
+
+(function () {
+  var MINUS = "\u2212";
+
+  function loadSeries(plot) {
+    var el = plot.querySelector(".chart-series");
+    if (!el) return null;
+    try { return JSON.parse(el.textContent || "null"); } catch (err) { return null; }
+  }
+
+  function esc(s) {
+    return String(s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function money(v, places) {
+    if (!isFinite(v)) return "—";
+    if (places == null) places = 2;
+    var n = Math.abs(Number(v)).toFixed(places);
+    var parts = n.split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return "$" + parts.join(".");
+  }
+
+  function signedMoney(v) {
+    if (!isFinite(v)) return "—";
+    return (v >= 0 ? "+" : MINUS) + money(Math.abs(v));
+  }
+
+  function pct(v, places, already) {
+    if (!isFinite(v)) return "—";
+    var x = already ? v : v * 100;
+    var sign = x > 0 ? "+" : (x < 0 ? MINUS : "");
+    return sign + Math.abs(x).toFixed(places) + "%";
+  }
+
+  function eqTick(v) {
+    if (!isFinite(v)) return "—";
+    var n = Math.round(v);
+    var sign = n < 0 ? MINUS : "";
+    return sign + "$" + Math.abs(n).toLocaleString("en-US");
+  }
+
+  function parseISO(iso) {
+    var p = String(iso || "").split("-");
+    if (p.length < 3) return null;
+    var y = +p[0], m = +p[1], d = +p[2];
+    if (!y || !m || !d) return null;
+    return new Date(Date.UTC(y, m - 1, d));
+  }
+
+  function isoFromUTC(dt) {
+    var mo = dt.getUTCMonth() + 1;
+    var da = dt.getUTCDate();
+    return dt.getUTCFullYear() + "-" + (mo < 10 ? "0" : "") + mo + "-" + (da < 10 ? "0" : "") + da;
+  }
+
+  function mondayOf(iso) {
+    var dt = parseISO(iso);
+    if (!dt) return iso;
+    var wd = dt.getUTCDay();
+    var offset = wd === 0 ? 6 : wd - 1;
+    dt.setUTCDate(dt.getUTCDate() - offset);
+    return isoFromUTC(dt);
+  }
+
+  function filterPoints(points, rangeKey) {
+    if (!points || !points.length) return [];
+    var latest = points[points.length - 1].date || "";
+    var start = null;
+    var key = String(rangeKey || "all").toLowerCase();
+    if (key === "wtd") start = mondayOf(latest);
+    else if (key === "mtd") start = latest.slice(0, 7) + "-01";
+    else if (key === "ytd") start = latest.slice(0, 4) + "-01-01";
+    else return points.slice();
+    var out = [];
+    var i, d;
+    for (i = 0; i < points.length; i++) {
+      d = points[i].date || "";
+      if (d >= start && d <= latest) out.push(points[i]);
+    }
+    return out.length ? out : [points[points.length - 1]];
+  }
+
+  function hoverDate(iso, fallback) {
+    var dt = parseISO(iso);
+    if (!dt) return fallback || "";
+    var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    return days[dt.getUTCDay()] + " " + (dt.getUTCMonth() + 1) + "/" + dt.getUTCDate();
+  }
+
+  function tooltipValue(p, kind) {
+    if (kind === "equity") return money(p.equity);
+    var dd = pct(p.drawdown_pct, 2, true);
+    if (isFinite(p.equity) && isFinite(p.hwm)) return dd + " (" + signedMoney(p.equity - p.hwm) + ")";
+    return dd;
+  }
+
+  function yDomain(cfg, pts) {
+    var i, vals = [];
+    if (cfg.y_mode === "equity") {
+      for (i = 0; i < pts.length; i++) if (isFinite(pts[i].equity)) vals.push(pts[i].equity);
+      if (isFinite(cfg.start_equity)) vals.push(cfg.start_equity);
+      (cfg.extra_lines || []).forEach(function (l) { if (isFinite(l.value)) vals.push(l.value); });
+      if (!vals.length) return {min: 0, max: 1};
+      return {min: Math.min.apply(null, vals) * 0.92, max: Math.max.apply(null, vals) * 1.08};
+    }
+    for (i = 0; i < pts.length; i++) if (isFinite(pts[i].drawdown_pct)) vals.push(pts[i].drawdown_pct);
+    vals.push(0, -30, -35, 2);
+    (cfg.extra_lines || []).forEach(function (l) { if (isFinite(l.value)) vals.push(l.value); });
+    return {min: Math.min.apply(null, vals), max: Math.max.apply(null, vals)};
+  }
+
+  function rangeNote(rangeKey, pts) {
+    if (!pts.length) return "";
+    var key = String(rangeKey || "all").toLowerCase();
+    var da = parseISO(pts[0].date), db = parseISO(pts[pts.length - 1].date);
+    var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    var label = "";
+    if (key === "wtd" && da && db) {
+      label = "Week of " + (da.getUTCMonth() + 1) + "/" + da.getUTCDate() + "\u2013" + (db.getUTCMonth() + 1) + "/" + db.getUTCDate();
+    } else if (key === "mtd" && db) {
+      label = months[db.getUTCMonth()] + " " + db.getUTCFullYear();
+    } else if (key === "ytd" && db) {
+      label = String(db.getUTCFullYear());
+    }
+    if (pts.length === 1) label = label ? (label + " · 1 mark") : "1 official mark";
+    return label;
+  }
+
+  function renderPlot(plot, rangeKey) {
+    var cfg = loadSeries(plot);
+    if (!cfg || !cfg.points) return;
+    var pts = filterPoints(cfg.points, rangeKey);
+    var width = cfg.width, height = cfg.height;
+    var pad = cfg.pad || {l: 64, r: 18, t: 16, b: 36};
+    var pl = pad.l, pr = pad.r, pt = pad.t, pb = pad.b;
+    var innerW = width - pl - pr;
+    var innerH = height - pt - pb;
+    var n = pts.length;
+    var kind = cfg.kind || "equity";
+    var pal = cfg.palette || {};
+    var bg = pal.bg || "#0A0E17";
+    var card = pal.card || "#121826";
+    var bd = pal.bd || "#2A3548";
+    var mu = pal.mu || "#8A93A6";
+    var color = cfg.color || "#5EE0D0";
+    if (kind === "drawdown_pct") {
+      var anyNeg = pts.some(function (p) { return p.drawdown_pct < 0; });
+      color = anyNeg ? (cfg.neg_color || "#FF6B7A") : (cfg.pos_color || "#5EE0D0");
+    }
+    var domain = yDomain(cfg, pts);
+    var yMin = domain.min, yMax = domain.max;
+    var span = (yMax - yMin) || 1;
+
+    function xAt(i) {
+      if (n <= 1) return pl + innerW / 2;
+      return pl + innerW * i / (n - 1);
+    }
+    function yAt(v) {
+      return pt + innerH * (1 - (v - yMin) / span);
+    }
+    function yFmt(v) {
+      return kind === "equity" ? eqTick(v) : pct(v, 0, true);
+    }
+
+    var parts = [];
+    parts.push('<rect x="0" y="0" width="' + width + '" height="' + height + '" fill="' + card + '"/>');
+    var ticks = 4, i, val, y, x, p;
+    for (i = 0; i <= ticks; i++) {
+      val = yMin + (yMax - yMin) * i / ticks;
+      y = yAt(val);
+      parts.push('<line x1="' + pl + '" y1="' + y.toFixed(1) + '" x2="' + (width - pr) + '" y2="' + y.toFixed(1) + '" stroke="' + bd + '" stroke-width="1"/>');
+      parts.push('<text x="' + (pl - 8) + '" y="' + y.toFixed(1) + '" text-anchor="end" dominant-baseline="middle" fill="' + mu + '" font-size="11" font-family="system-ui, sans-serif">' + esc(yFmt(val)) + '</text>');
+    }
+    for (i = 0; i < n; i++) {
+      x = xAt(i);
+      parts.push('<text x="' + x.toFixed(1) + '" y="' + (height - 12) + '" text-anchor="middle" fill="' + mu + '" font-size="11" font-family="system-ui, sans-serif">' + esc(pts[i].label || "") + '</text>');
+    }
+    (cfg.extra_lines || []).forEach(function (line) {
+      if (!isFinite(line.value)) return;
+      y = yAt(line.value);
+      var dash = line.dash === false ? "" : ' stroke-dasharray="6 5"';
+      var lc = line.color || "#F0C14B";
+      parts.push('<line x1="' + pl + '" y1="' + y.toFixed(1) + '" x2="' + (width - pr) + '" y2="' + y.toFixed(1) + '" stroke="' + lc + '" stroke-width="1.4"' + dash + "/>");
+      if (line.label) {
+        parts.push('<text x="' + (width - pr) + '" y="' + (y - 6).toFixed(1) + '" text-anchor="end" fill="' + lc + '" font-size="11" font-family="system-ui, sans-serif">' + esc(line.label) + "</text>");
+      }
+    });
+
+    var coords = [];
+    for (i = 0; i < n; i++) {
+      val = kind === "equity" ? pts[i].equity : pts[i].drawdown_pct;
+      if (!isFinite(val)) val = yMin;
+      coords.push([xAt(i), yAt(val)]);
+    }
+    if (coords.length) {
+      var d = "M " + coords.map(function (c) { return c[0].toFixed(1) + "," + c[1].toFixed(1); }).join(" L ");
+      if (cfg.area !== false) {
+        var baseVal = (yMin < 0 && yMax > 0) ? Math.min(Math.max(0, yMin), yMax) : yMin;
+        var base = yAt(baseVal);
+        var ad = d + " L " + coords[coords.length - 1][0].toFixed(1) + "," + base.toFixed(1) + " L " + coords[0][0].toFixed(1) + "," + base.toFixed(1) + " Z";
+        parts.push('<path d="' + ad + '" fill="' + color + '" fill-opacity="0.12"/>');
+      }
+      parts.push('<path d="' + d + '" fill="none" stroke="' + color + '" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>');
+      for (i = 0; i < coords.length; i++) {
+        parts.push('<circle cx="' + coords[i][0].toFixed(1) + '" cy="' + coords[i][1].toFixed(1) + '" r="3.2" fill="' + color + '" stroke="' + bg + '" stroke-width="1.4"/>');
+      }
+    }
+    parts.push('<g class="chart-hover" visibility="hidden" pointer-events="none">'
+      + '<line class="chart-crosshair" x1="0" x2="0" y1="' + pt + '" y2="' + (height - pb) + '" stroke="#E7ECF5" stroke-opacity="0.45" stroke-width="1"/>'
+      + '<circle class="chart-dot" cx="0" cy="0" r="5.5" fill="' + color + '" stroke="' + bg + '" stroke-width="2"/>'
+      + "</g>");
+
+    var payload = [];
+    for (i = 0; i < n; i++) {
+      p = pts[i];
+      payload.push({
+        x: Math.round(coords[i][0] * 10) / 10,
+        y: Math.round(coords[i][1] * 10) / 10,
+        date: hoverDate(p.date, p.label),
+        value: tooltipValue(p, kind)
+      });
+    }
+
+    var svg = plot.querySelector("svg");
+    var id = svg && svg.id ? ' id="' + esc(svg.id) + '"' : "";
+    var svgHtml = '<svg xmlns="http://www.w3.org/2000/svg" width="' + width + '" height="' + height + '" viewBox="0 0 ' + width + ' ' + height + '" role="img"' + id + ">" + parts.join("") + "</svg>";
+    if (svg) svg.outerHTML = svgHtml;
+    var dataEl = plot.querySelector(".chart-data");
+    if (dataEl) dataEl.textContent = JSON.stringify(payload);
+    var tip = plot.querySelector(".chart-tip");
+    if (tip) tip.hidden = true;
+
+    var card = plot.closest(".chart");
+    if (card) {
+      var note = card.querySelector(".chart-range-note");
+      if (note) {
+        var text = rangeNote(rangeKey, pts);
+        note.textContent = text;
+        note.hidden = !text;
+      }
+    }
+  }
+
+  document.querySelectorAll(".chart").forEach(function (card) {
+    var group = card.querySelector(".chart-ranges");
+    if (!group) return;
+    group.addEventListener("click", function (ev) {
+      var btn = ev.target && ev.target.closest ? ev.target.closest(".range-btn") : null;
+      if (!btn || !group.contains(btn)) return;
+      group.querySelectorAll(".range-btn").forEach(function (b) {
+        var on = b === btn;
+        if (on) b.classList.add("is-active"); else b.classList.remove("is-active");
+        b.setAttribute("aria-pressed", on ? "true" : "false");
+      });
+      var range = btn.getAttribute("data-range") || "all";
+      card.querySelectorAll(".chart-plot").forEach(function (plot) {
+        renderPlot(plot, range);
+      });
+    });
+  });
 })();
 
 </script>
